@@ -15,7 +15,7 @@ datasource db {
 
 model User {
   id          Int    @id @default(autoincrement())
-  phoneNumber String    @unique
+  phoneNumber String @unique
   password    String
   firstName   String
   lastName    String
@@ -23,8 +23,12 @@ model User {
 
 model Admin {
   id          Int    @id @default(autoincrement())
-  phoneNumber String    @unique
+  phoneNumber String @unique
   password    String
   firstName   String
   lastName    String
+  category    String
+  experience  Int
+  address     String
+  fees        Int
 }

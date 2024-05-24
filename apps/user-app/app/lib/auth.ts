@@ -21,21 +21,29 @@ export const authOptions = {
           placeholder: "Enter Password",
         },
       },
-      async authorize(credentials): Promise<any> {
+      async authorize(credentials) {
+        const phoneNumber = credentials?.phoneNumber;
+        const password = credentials?.password;
         const userInfo = await prisma.user.findFirst({
           where: {
-            phoneNumber: credentials?.phoneNumber.toString(),
-            password: credentials?.password.toString(),
+            phoneNumber,
+            password,
           },
         });
 
+        console.log("userInfo: ", userInfo);
+
+        console.log("wait");
+        // await new Promise((resolve) => setTimeout(resolve, 4000));
+        console.log("after");
         if (!userInfo) {
           return null;
         }
-
+        console.log(credentials);
         return {
-          id: userInfo.id,
+          id: userInfo.id.toString(),
           firstName: userInfo.firstName,
+          lastName: userInfo.lastName,
           phoneNumber: userInfo.phoneNumber,
         };
       },

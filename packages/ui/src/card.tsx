@@ -1,25 +1,34 @@
-export function Card({
-  className,
-  title,
-  children,
-  href,
+export default function ({
+  firstName,
+  lastName,
+  // category,
+  // experience,
+  // address,
+  // fees,
 }: {
-  className?: string;
-  title: string;
-  children: React.ReactNode;
-  href: string;
-}): JSX.Element {
+  firstName: string;
+  lastName: string;
+  // category: string;
+  // experience: string;
+  // address: string;
+  // fees: string;
+}) {
   return (
-    <a
-      className={className}
-      href={`${href}?utm_source=create-turbo&utm_medium=basic&utm_campaign=create-turbo"`}
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <h2>
-        {title} <span>-&gt;</span>
-      </h2>
-      <p>{children}</p>
-    </a>
+    <>
+      <div className="border border-black w-52 h-60">
+        <div>Image</div>
+        <div>
+          {firstName} {lastName}
+        </div>
+        {/* <div>{category}</div>
+        <div>{experience}</div>
+        <div>{address}</div>
+        <div>{fees}</div> */}
+
+        <button className="flex justify-center items-center border rounded-lg bg-blue-700 text-white h-8 w-28">
+          BookNow
+        </button>
+      </div>
+    </>
   );
 }

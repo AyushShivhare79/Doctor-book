@@ -23,6 +23,7 @@
   ],
   "dependencies": {
     "@prisma/client": "^5.14.0",
+    "axios": "^1.7.2",
     "next-auth": "^4.24.7",
     "prisma": "^5.14.0"
   }

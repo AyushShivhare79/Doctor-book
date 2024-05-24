@@ -11,15 +11,15 @@ export async function Signup(req: NextRequest) {
 
   const { firstName, lastName, phoneNumber, password } = userInfo;
 
-    const userExist = await prisma.user.findFirst({
-      where: {
-        phoneNumber,
-      },
-    });
+  const userExist = await prisma.user.findFirst({
+    where: {
+      phoneNumber,
+    },
+  });
 
-    if (userExist) {
-      return NextResponse.json({ msg: "User already exists!" });
-    }
+  if (userExist) {
+    return NextResponse.json({ msg: "User already exists!" });
+  }
 
   const response = await prisma.user.create({
     data: {

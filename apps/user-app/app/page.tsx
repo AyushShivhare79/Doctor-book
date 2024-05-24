@@ -1,13 +1,17 @@
-import Image from "next/image";
-import { Card } from "@repo/ui/card";
-import { Code } from "@repo/ui/code";
-import styles from "./page.module.css";
-import { Button } from "@repo/ui/button";
+"use client";
+
+import AppbarClient from "./AppbarClient";
+import Box from "./components/Box";
+import DoctorCard from "./components/DoctorCard";
 
 export default function Page(): JSX.Element {
   return (
     <>
-      <div className="bg-blue-500">Hello</div>
+      <AppbarClient />
+      <Box />
+      <div className="">
+        <DoctorCard />
+      </div>
     </>
   );
 }

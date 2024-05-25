@@ -1,5 +1,3 @@
-"use client";
-
 import AppbarClient from "./AppbarClient";
 import Box from "./components/Box";
 import DoctorCard from "./components/DoctorCard";
@@ -9,7 +7,7 @@ export default function Page(): JSX.Element {
     <>
       <AppbarClient />
       <Box />
-      <div className="">
+      <div>
         <DoctorCard />
       </div>
     </>

@@ -1,9 +1,5 @@
-import { PrismaClient } from "@repo/db";
-import { Button } from "./button";
-import { getServerSession } from "next-auth";
-// import authOptions from "../../"
+import Button from "./Button";
 
-const prisma = new PrismaClient();
 export default function ({
   id,
   firstName,
@@ -25,7 +21,6 @@ export default function ({
   ExpIcon: any;
   AddIcon: any;
 }) {
-  // const session = getServerSession(authOptions)
   return (
     <>
       <div className="border border-black w-60 h-72 ">
@@ -46,8 +41,7 @@ export default function ({
 
         <div className="flex gap-5 mt-auto items-center">
           <div className="text-sm">Fees: Rs. {fees}</div>
-
-          <Button btnName="BookNow" onClick={() => {}} />
+          <Button id={id} btnName="BookNow" />
         </div>
       </div>
     </>

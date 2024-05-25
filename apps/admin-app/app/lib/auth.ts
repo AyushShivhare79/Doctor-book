@@ -1,10 +1,7 @@
-import Credentials from "next-auth/providers/credentials";
 import { PrismaClient } from "@repo/db";
+import Credentials from "next-auth/providers/credentials";
 
 const prisma = new PrismaClient();
-
-//zod validation or in custom page check where is it good?
-
 export const authOptions = {
   providers: [
     Credentials({
@@ -24,36 +21,30 @@ export const authOptions = {
       async authorize(credentials) {
         const phoneNumber = credentials?.phoneNumber;
         const password = credentials?.password;
-        const userInfo = await prisma.user.findFirst({
+
+        const userExist = await prisma.admin.findFirst({
           where: {
             phoneNumber,
             password,
           },
         });
 
-        console.log("userInfo: ", userInfo);
-
-        console.log("wait");
-        // await new Promise((resolve) => setTimeout(resolve, 4000));
-        console.log("after");
-        if (!userInfo) {
+        if (!userExist) {
           return null;
         }
-        console.log(credentials);
+
         return {
-          id: userInfo.id.toString(),
-          firstName: userInfo.firstName,
-          lastName: userInfo.lastName,
-          phoneNumber: userInfo.phoneNumber,
+          id: userExist.id.toString(),
+          firstName: userExist.firstName,
+          lastName: userExist.lastName,
+          phoneNumber: userExist.phoneNumber,
+          fees: userExist.fees,
+          address: userExist.address,
+          category: userExist.category,
+          experience: userExist.experience,
         };
       },
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
-  callbacks: {
-    async session({ session, token }: any) {
-      session.user.id = token.sub;
-      return session;
-    },
-  },
 };

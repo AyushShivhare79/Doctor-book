@@ -1,9 +1,11 @@
+"use client"
+
 import Navbar from "@repo/ui/navbar";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function () {
   const session = useSession();
-  console.log("navbar: ", session);
+  // console.log("navbar: ", session);
   return (
     <>
       <div>
@@ -16,8 +18,6 @@ export default function () {
             signOut({ callbackUrl: "/api/auth/signin" });
           }}
         />
-
-        
       </div>
     </>
   );

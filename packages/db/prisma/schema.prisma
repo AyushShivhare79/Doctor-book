@@ -32,3 +32,9 @@ model Admin {
   address     String
   fees        Int
 }
+
+model Booking {
+  id       Int @id @default(autoincrement())
+  doctorId Int
+  userId   Int
+}

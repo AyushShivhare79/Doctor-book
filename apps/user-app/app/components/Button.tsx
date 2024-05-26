@@ -1,16 +1,17 @@
 "use client";
 
+import { Button } from "@repo/ui/button";
 import { storeData } from "../lib/actions/getAdminData";
 
 export default function ({ id, btnName }: any) {
   return (
     <>
-      <button
+      <Button
         onClick={() => storeData(id)}
-        className="flex justify-center items-center border rounded-lg bg-blue-700 text-white h-8 w-28"
+        className="border bg-blue-600 text-white"
       >
         {btnName}
-      </button>
+      </Button>
     </>
   );
 }

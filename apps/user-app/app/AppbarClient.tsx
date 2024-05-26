@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Navbar from "@repo/ui/navbar";
 import { signIn, signOut, useSession } from "next-auth/react";

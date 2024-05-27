@@ -14,11 +14,10 @@ import {
 export default function () {
   return (
     <>
-      <div className="flex border justify-center flex-col h-80 bg-blue-950">
-        <div className="border flex justify-center gap-5 ">
-          <SelectData value="State" item="MadhyaPradesh" />
-          <SelectData value="City" item="Damoh" />
-
+      <div className="flex justify-center flex-col h-80 bg-blue-950">
+        <div className="flex justify-center gap-5">
+          <SelectData />
+          <SelectData />
           <InputWithButton />
         </div>
       </div>
@@ -28,33 +27,28 @@ export default function () {
 
 export function InputWithButton() {
   return (
-    <div className="flex w-full items-center space-x-2">
-      <Input
-        type="text"
-        placeholder="Search Doctor..."
-        className="text-white"
-      />
-      <Button
-        type="submit"
-        className="border border-black text-white bg-blue-600"
-      >
-        Search
-      </Button>
-    </div>
+    <>
+      <Input className="text-white" placeholder="Search Doctor..." />
+      <Button className="bg-blue-600 text-white ">Search</Button>
+    </>
   );
 }
 
-export function SelectData({ value, item }: any) {
+export function SelectData() {
   return (
-    <Select>
-      <SelectTrigger className="w-[180px] text-white">
-        <SelectValue placeholder={value} />
-      </SelectTrigger>
-      <SelectContent className=" text-white ">
-        <SelectItem value="light">{item}</SelectItem>
-        <SelectItem value="dark">Test 2</SelectItem>
-        <SelectItem value="system">Test 3</SelectItem>
-      </SelectContent>
-    </Select>
+    <>
+      <div>
+        <Select>
+          <SelectTrigger className="w-[180px] text-white">
+            <SelectValue placeholder="Theme" />
+          </SelectTrigger>
+          <SelectContent className="text-white">
+            <SelectItem value="light">Light</SelectItem>
+            <SelectItem value="dark">Dark</SelectItem>
+            <SelectItem value="system">System</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+    </>
   );
 }

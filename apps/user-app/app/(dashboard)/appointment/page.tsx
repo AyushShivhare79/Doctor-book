@@ -1,13 +1,11 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@repo/ui/table";
-import getAppointmentData from "../../lib/actions/getAppointmentData";
 import axios from "axios";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../lib/auth";
@@ -23,15 +21,16 @@ export default async function () {
   return (
     <>
       <div>
-        {JSON.stringify(data.data)}
+        {/* {JSON.stringify(data.data)} */}
 
         <Table className="bg-black text-white">
           {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
           <TableHeader>
             <TableRow className=" text-md  font-semibold">
-              <TableHead>Doctor Name</TableHead>
-              <TableHead>Category</TableHead>
+              <TableHead>Name</TableHead>
+              <TableHead>Doctor</TableHead>
               <TableHead>Address</TableHead>
+              <TableHead>Date</TableHead>
               {/* <TableHead>Fees</TableHead> */}
               {/* <TableHead>Status</TableHead> */}
             </TableRow>
@@ -40,9 +39,14 @@ export default async function () {
           {data.data.map((m: any) => (
             <TableBody>
               <TableRow>
-                <TableCell>{m.id}</TableCell>
-                <TableCell>{m.doctorId}</TableCell>
-                <TableCell>{m.userId}</TableCell>
+                <TableCell>
+                  {m.user.firstName} {m.user.lastName}
+                </TableCell>
+                <TableCell>
+                  {m.doctor.firstName} {m.doctor.lastName}
+                </TableCell>
+                <TableCell>{m.doctor.address}</TableCell>
+                <TableCell>{m.date}</TableCell>
                 {/* <TableCell>{fees}</TableCell> */}
                 {/* <TableCell>{status}</TableCell> */}
               </TableRow>

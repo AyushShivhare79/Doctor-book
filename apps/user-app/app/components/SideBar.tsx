@@ -4,7 +4,7 @@ export default function () {
   return (
     <>
       <div className="flex justify-center pt-40 border w-full">
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-5">
           <SideLabel icon={<Home />} text="Home" href="/dashboard" />
           <SideLabel
             icon={<Appointment />}

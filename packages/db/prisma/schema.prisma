@@ -14,16 +14,17 @@ datasource db {
 }
 
 model User {
-  id          Int    @id @default(autoincrement())
-  phoneNumber String @unique
+  id          Int       @id @default(autoincrement())
+  phoneNumber String    @unique
   password    String
   firstName   String
   lastName    String
+  booking     Booking[]
 }
 
 model Admin {
-  id          Int    @id @default(autoincrement())
-  phoneNumber String @unique
+  id          Int       @id @default(autoincrement())
+  phoneNumber String    @unique
   password    String
   firstName   String
   lastName    String
@@ -31,10 +32,14 @@ model Admin {
   experience  Int
   address     String
   fees        Int
+  booking     Booking[]
 }
 
 model Booking {
-  id       Int @id @default(autoincrement())
+  id       Int      @id @default(autoincrement())
   doctorId Int
+  doctor   Admin    @relation(fields: [doctorId], references: [id])
   userId   Int
+  user     User     @relation(fields: [userId], references: [id])
+  date     DateTime
 }

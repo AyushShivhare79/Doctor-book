@@ -11,6 +11,10 @@ async function Appointment(req: NextRequest) {
     where: {
       userId: Number(userId),
     },
+    include: {
+      user: true,
+      doctor: true,
+    },
   });
 
   return NextResponse.json(response);

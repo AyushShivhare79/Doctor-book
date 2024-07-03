@@ -5,23 +5,9 @@ const DoctorCard = async () => {
   const data = await getAdminData();
   return (
     <>
-      <div className="flex justify-center">
-        <div className="grid grid-cols-4 gap-16 pt-5">
-          {data.map((d) => (
-            <div>
-              <Card
-                id={d.id}
-                firstName={d.firstName}
-                lastName={d.lastName}
-                category={d.category}
-                experience={d.experience.toString()}
-                address={d.address}
-                fees={d.fees.toString()}
-                ExpIcon={<Experience />}
-                AddIcon={<Address />}
-              />
-            </div>
-          ))}
+      <div className="flex justify-center pt-5">
+        <div className="grid grid-cols-4 gap-5">
+          <Card data={data} ExpIcon={<Experience />} AddIcon={<Address />} />
         </div>
       </div>
     </>

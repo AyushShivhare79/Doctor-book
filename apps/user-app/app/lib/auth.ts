@@ -1,7 +1,5 @@
 import Credentials from "next-auth/providers/credentials";
-import { PrismaClient } from "@repo/db";
-
-const prisma = new PrismaClient();
+import prisma from "@repo/db/client";
 
 //zod validation or in custom page check where is it good?
 

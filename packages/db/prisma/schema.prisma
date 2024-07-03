@@ -5,7 +5,8 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -33,6 +34,9 @@ model Admin {
   address     String
   fees        Int
   booking     Booking[]
+
+
+  // @@fulltext([firstName, lastName, category, experience, address, fees ])
 }
 
 model Booking {
@@ -42,4 +46,5 @@ model Booking {
   userId   Int
   user     User     @relation(fields: [userId], references: [id])
   date     DateTime
+
 }

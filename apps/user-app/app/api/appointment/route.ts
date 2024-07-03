@@ -1,7 +1,5 @@
-import { PrismaClient } from "@repo/db";
+import prisma from "@repo/db/client";
 import { NextRequest, NextResponse } from "next/server";
-
-const prisma = new PrismaClient();
 
 async function Appointment(req: NextRequest) {
   const userInfo = await req.json();

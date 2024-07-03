@@ -1,4 +1,4 @@
-import { Input } from "@repo/ui/input";
+import Input from "./Input";
 import { Button } from "@repo/ui/button";
 
 import SearchInput from "@repo/ui/searchInput";
@@ -18,21 +18,21 @@ export default function () {
         <div className="flex justify-center gap-5">
           <SelectData />
           <SelectData />
-          <InputWithButton />
+          <Input />
         </div>
       </div>
     </>
   );
 }
 
-export function InputWithButton() {
-  return (
-    <>
-      <Input className="text-white" placeholder="Search Doctor..." />
-      <Button className="bg-blue-600 text-white ">Search</Button>
-    </>
-  );
-}
+// export function InputWithButton() {
+//   return (
+//     <>
+//       <Input className="text-white" placeholder="Search Doctor..." />
+//       <Button className="bg-blue-600 text-white ">Search</Button>
+//     </>
+//   );
+// }
 
 export function SelectData() {
   return (

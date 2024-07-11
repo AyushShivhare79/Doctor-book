@@ -1,12 +1,15 @@
 {
   "name": "doctor-book",
   "private": true,
+  "prisma": {
+    "schema": "packages/database/prisma/schema.prisma"
+  },
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "postinstall": "prisma generate"
+    "generate": "turbo run generate"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",

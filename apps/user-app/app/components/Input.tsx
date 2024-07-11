@@ -32,7 +32,7 @@ export default function () {
             "http://localhost:3001/api/search",
             {
               search,
-            }
+            },
           );
           console.log(response);
           return response;

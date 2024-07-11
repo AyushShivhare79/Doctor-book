@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 //UserExists
 //CreateUser
 
-export async function Signup(req: NextRequest) {
+async function Signup(req: NextRequest) {
   const userInfo = await req.json();
 
   const { firstName, lastName, phoneNumber, password } = userInfo;

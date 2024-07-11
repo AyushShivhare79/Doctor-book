@@ -79,7 +79,7 @@ interface AppointmentProps {
   // fees: string;
 }
 
-export function AppointmentTable({
+function AppointmentTable({
   name,
   category,
   address,

@@ -12,7 +12,9 @@
     "./select": "./src/components/ui/select.tsx",
     "./table": "./src/components/ui/table.tsx",
     "./sheet": "./src/components/ui/sheet.tsx",
-    "./alert-dialog": "./src/components/ui/alert-dialog.tsx"
+    "./alert-dialog": "./src/components/ui/alert-dialog.tsx",
+    "./customSelect": "./src/select.tsx",
+    "./customInput": "./src/input.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",

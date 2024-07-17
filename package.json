@@ -28,6 +28,7 @@
   "dependencies": {
     "@prisma/client": "^5.14.0",
     "axios": "^1.7.2",
+    "cloudinary": "^2.3.0",
     "fuse.js": "^7.0.0",
     "next-auth": "^4.24.7",
     "next-cloudinary": "^6.6.2",

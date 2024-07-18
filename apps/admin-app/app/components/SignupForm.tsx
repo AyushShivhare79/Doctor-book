@@ -15,7 +15,7 @@ export default function () {
   return (
     <>
       <div className="">
-        <Card className="">
+        <Card>
           <CardHeader>
             <CardTitle>Doctor Book</CardTitle>
           </CardHeader>
@@ -29,14 +29,17 @@ export default function () {
 
             <CardContent className="flex gap-5">
               <Input placeholder="Phone Number" />
-              <Input placeholder="Addresss" />
+              <Input placeholder="EmailID" />
               {/* Select for city, state */}
             </CardContent>
 
             <CardContent className="flex gap-5">
               <Select></Select>
+            </CardContent>
+
+            <CardContent className="flex gap-5">
+              <Input placeholder="Addresss" />
               <Input placeholder="Fess" />
-              <Input placeholder="EmailID" />
             </CardContent>
 
             <CardContent className="flex gap-5">
@@ -45,7 +48,7 @@ export default function () {
             </CardContent>
           </CardContent>
           {/* </CardContent> */}
-          <CardFooter>
+          <CardFooter className="flex justify-center items-center">
             <Button className="bg-black text-white">Signup</Button>
           </CardFooter>
         </Card>

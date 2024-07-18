@@ -22,8 +22,8 @@ const ImageUpload = () => {
       const formdata = new FormData();
       formdata.append("Image", image);
 
-      const response = await axios.post("/api/upload-image", formdata);
       console.log("HERE");
+      const response = await axios.post("/api/upload-image", formdata);
 
       const data = await response.data;
       console.log("DATA: ", data);

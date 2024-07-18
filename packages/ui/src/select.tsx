@@ -13,7 +13,7 @@ export default function () {
     <>
       <Select>
         <SelectTrigger className="w-[280px]">
-          <SelectValue placeholder="Select a timezone" />
+          <SelectValue placeholder="City" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>

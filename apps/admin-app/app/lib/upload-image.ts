@@ -1,6 +1,9 @@
 import cloudinary from "./cloudinary";
 
 export const UploadImage = async (file: File, folder: string) => {
+  const buffer = await file.arrayBuffer();
+  const bytes = Buffer.from(buffer);
+
   return new Promise(async (resolve, rejects) => {
     await cloudinary.uploader
       .upload_stream(
@@ -13,8 +16,8 @@ export const UploadImage = async (file: File, folder: string) => {
             rejects(err.message);
           }
           resolve(resolve);
-        },
+        }
       )
-      .end();
+      .end(bytes);
   });
 };

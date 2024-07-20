@@ -8,9 +8,7 @@ import Signup from "./signup/page";
 export default function Page(): JSX.Element {
   return (
     <>
-      <div>
-        {/* <Signup /> */}
-      </div>
+      <div>{/* <Signup /> */}</div>
     </>
   );
 }

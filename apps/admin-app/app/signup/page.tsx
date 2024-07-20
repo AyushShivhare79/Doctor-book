@@ -6,7 +6,6 @@ const Signup = () => {
     <>
       <div className="flex justify-center ">
         <div>
-          <ImageUpload />
           <SignupForm />
         </div>
       </div>

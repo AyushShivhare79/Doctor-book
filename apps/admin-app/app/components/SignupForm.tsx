@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@repo/ui/button";
 import {
   Card,
@@ -10,8 +12,26 @@ import {
 
 import Input from "@repo/ui/customInput";
 import Select from "@repo/ui/customSelect";
+import ImageUpload from "../imageUpload";
+import { useState } from "react";
+import axios from "axios";
 
 export default function () {
+  const [fname, setFname] = useState<string>();
+  const [mname, setMname] = useState<string>();
+  const [lname, setLname] = useState<string>();
+  const [phoneNumber, setPhoneNumber] = useState<string>();
+  const [email, setEmailId] = useState<string>();
+  const [address, setAddress] = useState<string>();
+  const [fees, setFees] = useState<string>();
+  const [password, setPassword] = useState<string>();
+
+  const handleClick = () => {
+    axios.post("", {
+      body: {},
+    });
+  };
+
   return (
     <>
       <div className="">
@@ -20,7 +40,11 @@ export default function () {
             <CardTitle>Doctor Book</CardTitle>
           </CardHeader>
           {/* <CardContent className="flex items-center"> */}
-          <CardContent className="">
+          <CardContent>
+            <CardContent>
+              <ImageUpload />
+            </CardContent>
+
             <CardContent className="flex gap-5">
               <Input placeholder="First Name" />
               <Input placeholder="Middle Name(Optional)" />

@@ -5,13 +5,13 @@ async function Signup(req: NextRequest) {
   const userInfo = await req.json();
   const {
     phoneNumber,
-    password,
     firstName,
     lastName,
-    category,
-    experience,
+    middleName,
+    emailId,
     address,
     fees,
+    password,
   } = userInfo;
 
   const userExist = await prisma.admin.findFirst({
@@ -27,13 +27,13 @@ async function Signup(req: NextRequest) {
   const response = await prisma.admin.create({
     data: {
       phoneNumber,
-      password,
       firstName,
       lastName,
-      category,
-      experience: Number(experience),
+      middleName,
+      emailId,
       address,
-      fees: Number(fees),
+      fees,
+      password,
     },
   });
   return NextResponse.json(response);

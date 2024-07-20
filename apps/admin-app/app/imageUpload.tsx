@@ -5,13 +5,18 @@ import { ChangeEvent, useState } from "react";
 
 const ImageUpload = () => {
   const [image, setFile] = useState<File | null>();
+  const [preview, setPreview] = useState<any>();
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     console.log("Yes inside");
     if (e.target.files) {
       setFile(e.target.files[0]);
+      // @ts-ignore
+      setPreview(URL.createObjectURL(e.target.files[0]));
     }
   };
+
+  console.log("Image: ", image);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -34,8 +39,21 @@ const ImageUpload = () => {
   return (
     <>
       <form onSubmit={handleSubmit}>
+        <label
+          htmlFor="dp"
+          // className="border border-black rounded-full px-10 py-14 hover:cursor-pointer"
+        >
+          Image
+        </label>
+        <img
+          className="border border-black rounded-full}"
+          alt="preview image"
+          src={preview}
+        />
         <input
+          id="dp"
           type="file"
+          className="hidden"
           onChange={handleFileChange}
           placeholder="upload image"
         />

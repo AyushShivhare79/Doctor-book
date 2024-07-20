@@ -26,15 +26,14 @@ model User {
 model Admin {
   id          Int       @id @default(autoincrement())
   phoneNumber String    @unique
-  password    String
   firstName   String
   lastName    String
-  category    String
-  experience  Int
+  middleName  String ?
+  emailId     String
   address     String
   fees        Int
+  password    String
   booking     Booking[]
-
 
   // @@fulltext([firstName, lastName, category, experience, address, fees ])
 }
@@ -46,6 +45,4 @@ model Booking {
   userId   Int
   user     User     @relation(fields: [userId], references: [id])
   date     DateTime
-
 }
-

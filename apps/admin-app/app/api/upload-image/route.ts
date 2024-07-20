@@ -14,6 +14,6 @@ export const POST = async (req: NextRequest) => {
     { msg: image },
     {
       status: 200,
-    }
+    },
   );
 };

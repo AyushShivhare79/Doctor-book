@@ -15,7 +15,7 @@ export const UploadImage = async (file: File, folder: string) => {
           if (err) {
             rejects(err.message);
           }
-          resolve(resolve);
+          resolve(result);
         },
       )
       .end(bytes);

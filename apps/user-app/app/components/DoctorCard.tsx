@@ -7,12 +7,7 @@ const DoctorCard = async () => {
     <>
       <div className="flex justify-center pt-5">
         <div className="grid grid-cols-4 gap-5">
-          <Card
-            data={data}
-            ExpIcon={<Experience />}
-            AddIcon={<Address />}
-            Category={<Category />}
-          />
+          <Card data={data} AddIcon={<Address />} Category={<Category />} />
         </div>
       </div>
     </>

@@ -28,7 +28,7 @@ model Admin {
   phoneNumber String    @unique
   firstName   String
   lastName    String
-  middleName  String ?
+  middleName  String?
   emailId     String
   address     String
   fees        Int
@@ -36,6 +36,12 @@ model Admin {
   booking     Booking[]
 
   // @@fulltext([firstName, lastName, category, experience, address, fees ])
+}
+
+model image {
+  id       Int    @id @default(autoincrement())
+  imageUrl String
+  publicId String
 }
 
 model Booking {

@@ -4,6 +4,7 @@ import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
 import Provider from "./provider";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

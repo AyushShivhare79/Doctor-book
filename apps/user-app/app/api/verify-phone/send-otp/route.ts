@@ -1,20 +1,28 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import twilio from "twilio";
+
 const accountSID = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
-const serviceID: any = process.env.SERVICE_SID;
+const serviceID: any = process.env.TWILIO_VERIFICATION_SERVICE_SID;
 
 const client = twilio(accountSID, authToken);
 
-export async function GET() {
+async function SendOTP(req: NextRequest) {
+  const userInfo = await req.json();
+
+  const { phoneNumber } = userInfo;
   try {
+    console.log("Api phoneNUmber", phoneNumber)
+
+    console.log("HERE");
+    
     const twilioResponse = await client.verify.v2
       .services(serviceID)
       .verifications.create({
         channel: "sms",
-        to: "6263149810",
+        to: `+91${phoneNumber}`,
       });
-
+    console.log(twilioResponse);
     if (twilioResponse.status === "pending") {
       return NextResponse.json({ sent: true }, { status: 200 });
     } else {
@@ -26,3 +34,4 @@ export async function GET() {
     return NextResponse.json({ msg: "Something went wrong" }, { status: 500 });
   }
 }
+export { SendOTP as GET, SendOTP as POST };

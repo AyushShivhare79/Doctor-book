@@ -14,7 +14,9 @@
     "./sheet": "./src/components/ui/sheet.tsx",
     "./alert-dialog": "./src/components/ui/alert-dialog.tsx",
     "./customSelect": "./src/select.tsx",
-    "./customInput": "./src/input.tsx"
+    "./customInput": "./src/input.tsx",
+    "./input-otp": "./src/components/ui/input-otp.tsx",
+    "./form": "./src/components/ui/form.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
@@ -36,14 +38,20 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-icons": "^1.3.0",
+    "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-select": "^2.0.0",
-    "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-toast": "^1.2.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "input-otp": "^1.2.4",
+    "react-hook-form": "^7.52.1",
     "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.23.8"
   }
 }

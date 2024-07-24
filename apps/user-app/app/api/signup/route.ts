@@ -12,7 +12,7 @@ export const signupBody = z
     phoneNumber: z.string().min(9).max(11),
     password: z.string().min(7).max(20),
     confirmPassword: z.string().min(7).max(20),
-  }) 
+  })
   .refine((data) => data.password === data.confirmPassword, {
     path: ["confirmPassword"],
     message: "Password does not match",

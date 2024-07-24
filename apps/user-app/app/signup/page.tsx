@@ -14,8 +14,15 @@ import axios from "axios";
 import { signupBody, SignupBody } from "../api/signup/route";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { ChangeEvent, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function Signup() {
+  const [otp, setOTP] = useState<string>();
+  const [phoneNumber, setPhoneNumber] = useState<string>();
+
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -24,9 +31,30 @@ export default function Signup() {
     resolver: zodResolver(signupBody),
   });
 
+  const verifyOTP = async () => {
+    console.log("OTP verify successful");
+  };
+
   const submitData: SubmitHandler<SignupBody> = async (data) => {
-    const response = await axios.post("/api/signup", data);
-    console.log(response.data);
+    // if (sendOTP.data.status === "pending") {
+    //   const verifyOTP = await axios.post(
+    //     `/api/verify-phone/verify-otp?otp=${otp}&phoneNumber=${data.phoneNumber}`,
+    //   );
+    //   if (verifyOTP.data.status === "approved") {
+    //     const response = await axios.post("/api/signup", data);
+    //     console.log(response.data);
+    //   }
+    // }
+
+    const createAccount = await axios.post("/api/signup", data);
+    console.log("Account: ", createAccount);
+
+    const response = await axios.post("/api/verify-phone/send-otp", data);
+
+    if (response.data) {
+      router.push(`/verify-otp?phoneNumber=${data.phoneNumber}`);
+      return toast.success("OTP send successful");
+    }
   };
 
   return (
@@ -52,11 +80,20 @@ export default function Signup() {
                 name={"lastName"}
               />
               {errors.lastName && <div>{errors.lastName.message}</div>}
+              {/* <form className="flex gap-2" onSubmit={handleSubmit(sendOTP)} action=""> */}
               <Input
                 placeholder="Phone Number"
                 register={register}
                 name={"phoneNumber"}
               />
+
+              {/* <button
+                className="rounded bg-blue-500 text-white w-16 "
+                type="submit"
+              >
+                SendOTP
+              </button> */}
+              {/* </form> */}
               {errors.phoneNumber && <div>{errors.phoneNumber.message}</div>}
               <Input
                 placeholder="Password"
@@ -73,11 +110,27 @@ export default function Signup() {
               {errors.confirmPassword && (
                 <div>{errors.confirmPassword.message}</div>
               )}
+              {/* <div className=" flex gap-2">
+                <input
+                  type="text"
+                  className="border border-black"
+                  placeholder="OTP"
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setOTP(e.target.value)
+                  }
+                />
+                <button
+                  className="rounded bg-blue-500 text-white w-16 "
+                  onClick={verifyOTP}
+                >
+                  Verify
+                </button>
+              </div>*/}
             </CardContent>
 
             <CardFooter className="flex justify-center items-center">
-              <Button type="submit" className="bg-black text-white">
-                Signup
+              <Button type="submit" className="bg-black text-white block">
+                Create Account
               </Button>
             </CardFooter>
           </form>

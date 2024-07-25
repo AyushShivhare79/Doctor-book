@@ -4,157 +4,174 @@ import { Button } from "@repo/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@repo/ui/card";
-
-import Input from "@repo/ui/customInput";
-import Select from "@repo/ui/customSelect";
 import ImageUpload from "../imageUpload";
-import { ChangeEvent, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { signupBody, SignupBody } from "../api/signup/route";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Input from "@repo/ui/customInput";
 import axios from "axios";
 
 export default function () {
-  const [fname, setFname] = useState<string>();
-  const [mname, setMname] = useState<string>();
-  const [lname, setLname] = useState<string>();
-  const [phoneNumber, setPhoneNumber] = useState<string>();
-  const [email, setEmailId] = useState<string>();
-  const [address, setAddress] = useState<string>();
-  const [fees, setFees] = useState<string>();
-  const [password, setPassword] = useState<string>();
-
-  const [field, setField] = useState<boolean>(false);
-
-  const [fnameCheck, setFnameCheck] = useState<boolean>(false);
-  const [mnameCheck, setMnameCheck] = useState<boolean>(false);
-  const [lnameCheck, setLnameCheck] = useState<boolean>(false);
-  const [phoneNumberCheck, setPhoneNumberCheck] = useState<boolean>(false);
-  const [emailCheck, setEmailIdCheck] = useState<boolean>(false);
-  const [addressCheck, setAddressCheck] = useState<boolean>(false);
-  const [feesCheck, setFeesCheck] = useState<boolean>(false);
-  const [passwordCheck, setPasswordCheck] = useState<boolean>(false);
-
-  const handleClick = async () => {
-    await axios.post("/api/signup", {
-      body: {
-        phoneNumber,
-        fname,
-        mname,
-        lname,
-        email,
-        address,
-        fees,
-        password,
-      },
-    });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignupBody>({
+    resolver: zodResolver(signupBody),
+  });
+  const submitData: SubmitHandler<SignupBody> = async (data) => {
+    const response = await axios.post("/api/signup", data);
+    console.log("This is the response: ", response.data);
   };
 
   return (
     <>
-      <div className="">
-        <Card>
-          <CardHeader>
-            <CardTitle>Doctor Book</CardTitle>
-          </CardHeader>
-          {/* <CardContent className="flex items-center"> */}
-          <CardContent>
-            <CardContent>
+      <Card className="flex justify-center flex-col items-center h-screen">
+        <CardHeader className="flex justify-center items-center">
+          <CardTitle className="text-3xl">Doctor Book (ADMIN)</CardTitle>
+        </CardHeader>
+        <form onSubmit={handleSubmit(submitData)}>
+          <CardContent className="flex flex-col gap-5 p-10 ">
+            {/* <CardContent className="flex justify-center items-center">
               <ImageUpload />
             </CardContent>
+            */}
 
-            <CardContent className="flex gap-5">
-              <Input
-                state={fnameCheck}
-                placeholder="First Name"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setFname(e.target.value)
-                }
-              />
-              <Input
-                state={mnameCheck}
-                placeholder="Middle Name(Optional)"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setMname(e.target.value)
-                }
-              />
-              <Input
-                state={lnameCheck}
-                placeholder="Last Name"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setLname(e.target.value)
-                }
-              />
-            </CardContent>
+            <div className="flex gap-5">
+              <div>
+                <Input
+                  name={"firstName"}
+                  placeholder="First Name"
+                  register={register}
+                />
+                {errors.firstName && (
+                  <div className="text-red-500 text-sm">
+                    {errors.firstName.message}
+                  </div>
+                )}
+              </div>
 
-            <CardContent className="flex gap-5">
+              {/* <div>
+                <Input
+                  name={"middleName"}
+                  placeholder="Middle Name(Optional)"
+                  register={register}
+                />
+                {errors.middleName && (
+                  <div className="text-red-500 text-sm">
+                    {errors.middleName.message}
+                  </div>
+                )}
+              </div> */}
+
+              <div>
+                <Input
+                  name={"lastName"}
+                  placeholder="Last Name"
+                  register={register}
+                />
+                {errors.lastName && (
+                  <div className="text-red-500 text-sm">
+                    {errors.lastName.message}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div>
+              <div>
+                <Input
+                  name={"emailId"}
+                  placeholder="Email ID"
+                  register={register}
+                />
+                {errors.emailId && (
+                  <div className="text-red-500 text-sm">
+                    {errors.emailId.message}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div>
               <Input
-                state={phoneNumberCheck}
+                name={"phoneNumber"}
                 placeholder="Phone Number"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setPhoneNumber(e.target.value)
-                }
+                register={register}
               />
-              <Input
-                state={emailCheck}
-                placeholder="EmailID"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setEmailId(e.target.value)
-                }
-              />
-              {/* Select for city, state */}
-            </CardContent>
+              {errors.phoneNumber && (
+                <div className="text-red-500 text-sm">
+                  {errors.phoneNumber.message}
+                </div>
+              )}
+            </div>
 
-            <CardContent className="flex gap-5">
-              <Select></Select>
-            </CardContent>
+            <div>
+              <Input
+                name={"address"}
+                placeholder="Address"
+                register={register}
+              />
+              {errors.address && (
+                <div className="text-red-500 text-sm">
+                  {errors.address.message}
+                </div>
+              )}
+            </div>
 
-            <CardContent className="flex gap-5">
-              <Input
-                state={addressCheck}
-                placeholder="Addresss"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setAddress(e.target.value)
-                }
-              />
-              <Input
-                state={feesCheck}
-                placeholder="Fess"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setFees(e.target.value)
-                }
-              />
-            </CardContent>
+            <div className="flex  gap-5">
+              <div>
+                <Input name={"fees"} placeholder="Fees" register={register} />
+                {errors.fees && (
+                  <div className="text-red-500 text-sm">
+                    {errors.fees.message}
+                  </div>
+                )}
+              </div>
 
-            <CardContent className="flex gap-5">
-              <Input
-                state={passwordCheck}
-                placeholder="Password"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setPassword(e.target.value)
-                }
-              />
+              <div>
+                <Input
+                  name={"password"}
+                  placeholder="Password"
+                  register={register}
+                />
+                {errors.password && (
+                  <div className="text-red-500 text-sm">
+                    {errors.password.message}
+                  </div>
+                )}
+              </div>
 
-              {/* Improve here bro */}
-              <Input
-                state={field}
-                placeholder="Confirm Password"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setPassword(e.target.value)
-                }
-              />
-            </CardContent>
+              <div>
+                <Input
+                  name={"confirmPassword"}
+                  placeholder="Confirm Password"
+                  register={register}
+                />
+                {errors.confirmPassword && (
+                  <div className="text-red-500 text-sm">
+                    {errors.confirmPassword.message}
+                  </div>
+                )}
+              </div>
+            </div>
           </CardContent>
-          {/* </CardContent> */}
-          <CardFooter className="flex justify-center items-center">
-            <Button className="bg-black text-white" onClick={handleClick}>
+          {/* <CardFooter className="flex justify-center items-center">
+              <Button type="submit" className="bg-black text-white block">
+                Create Account
+              </Button>
+            </CardFooter> */}
+          <CardFooter className="flex justify-center ">
+            <Button type="submit" className="bg-black text-white">
               Signup
             </Button>
           </CardFooter>
-        </Card>
-      </div>
+        </form>
+      </Card>
     </>
   );
 }

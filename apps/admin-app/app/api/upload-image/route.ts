@@ -8,12 +8,8 @@ export const POST = async (req: NextRequest) => {
 
   console.log("HERE YOU ARE: ", image);
 
-  const data = await UploadImage(image, "admin-images");
+  const data: any = await UploadImage(image, "admin-images");
   console.log("I am data: ", data);
-  return NextResponse.json(
-    { msg: image },
-    {
-      status: 200,
-    },
-  );
+
+  return NextResponse.json({ msg: image, url: data.url }, { status: 200 });
 };

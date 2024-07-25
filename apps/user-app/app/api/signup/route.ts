@@ -1,17 +1,33 @@
 import prisma from "@repo/db/client";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
+
 //Zod
 //UserExists
 //CreateUser
 
 export const signupBody = z
   .object({
-    firstName: z.string().min(2).max(30),
-    lastName: z.string().min(2).max(30),
-    phoneNumber: z.string().min(9).max(11),
-    password: z.string().min(7).max(20),
-    confirmPassword: z.string().min(7).max(20),
+    firstName: z
+      .string()
+      .min(2, { message: "First Name should be more than 2" })
+      .max(30, { message: "First Name should be less than 30" }),
+    lastName: z
+      .string()
+      .min(2, { message: "Last Name should be more than 2" })
+      .max(30, { message: "Last Name should be less than 30" }),
+    phoneNumber: z
+      .string()
+      .min(10, { message: "Invalid Number" })
+      .max(10, { message: "Invalid Number" }),
+    password: z
+      .string()
+      .min(7, { message: "Password must be more than 7" })
+      .max(20, { message: "Password must be less than 20" }),
+    confirmPassword: z
+      .string()
+      .min(7, { message: "Password must be more than 7" })
+      .max(20, { message: "Password must be less than 20" }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     path: ["confirmPassword"],
@@ -39,16 +55,19 @@ async function Signup(req: NextRequest) {
   if (userExist) {
     return NextResponse.json({ msg: "User already exists!" });
   }
-
-  const response = await prisma.user.create({
-    data: {
-      firstName,
-      lastName,
-      phoneNumber,
-      password,
-    },
-  });
-  return NextResponse.json(response);
+  try {
+    const response = await prisma.user.create({
+      data: {
+        firstName,
+        lastName,
+        phoneNumber,
+        password,
+      },
+    });
+    return NextResponse.json(response);
+  } catch (error) {
+    return NextResponse.json(error);
+  }
 }
 
 export { Signup as GET, Signup as POST };

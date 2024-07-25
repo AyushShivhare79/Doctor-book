@@ -8,7 +8,6 @@ import { useSearchParams } from "next/navigation";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -30,13 +29,6 @@ export default function () {
     } else {
       toast.success("Wrong OTP");
     }
-
-    console.log(response.data);
-
-    // if (response.data) {
-    //   const response = await axios.post("/api/signup", data);
-    //   //   console.log(response.data);
-    // }
   };
 
   const handleSubmit = () => {};
@@ -44,7 +36,6 @@ export default function () {
     <>
       {JSON.stringify(otp)}
 
-      {/* <div className="border border-black flex justify-center "> */}
       <div className="flex flex-col justify-center items-center h-screen">
         <Card className="flex justify-center flex-col items-center p-10">
           <CardHeader>

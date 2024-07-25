@@ -2,6 +2,9 @@
 
 import axios from "axios";
 import { ChangeEvent, useState } from "react";
+import { Cloudinary } from "@cloudinary/url-gen";
+import { Resize } from "@cloudinary/url-gen/actions";
+import { scale } from "@cloudinary/url-gen/actions/resize";
 
 const ImageUpload = () => {
   const [image, setFile] = useState<File | null>();
@@ -15,6 +18,12 @@ const ImageUpload = () => {
       setPreview(URL.createObjectURL(e.target.files[0]));
     }
   };
+
+  // const CloudinaryImage = new Cloudinary({
+  //   cloud: {
+  //     cloudName: process.env.cloud_name,
+  //   },
+  // });
 
   console.log("Image: ", image);
 
@@ -30,8 +39,9 @@ const ImageUpload = () => {
       console.log("HERE");
       const response = await axios.post("/api/upload-image", formdata);
 
-      const data = await response.data;
+      const data: any = await response;
       console.log("DATA: ", data);
+     await localStorage.setItem("URL", data.url);
     } catch (error: any) {
       console.log("Error: ", error.message);
     }
@@ -39,14 +49,9 @@ const ImageUpload = () => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <label
-          htmlFor="dp"
-          // className="border border-black rounded-full px-10 py-14 hover:cursor-pointer"
-        >
-          Image
-        </label>
+        <label htmlFor="dp">Image</label>
         <img
-          className="border border-black rounded-full}"
+          className="max-w-[200px] min-w-[200px] max-h-[200px] min-h-[200px] object-cover rounded-full"
           alt="preview image"
           src={preview}
         />

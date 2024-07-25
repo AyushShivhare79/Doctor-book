@@ -15,13 +15,9 @@ import { signupBody, SignupBody } from "../api/signup/route";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
 import { toast } from "react-toastify";
 
 export default function Signup() {
-  const [otp, setOTP] = useState<string>();
-  const [phoneNumber, setPhoneNumber] = useState<string>();
-
   const router = useRouter();
   const {
     register,
@@ -31,29 +27,23 @@ export default function Signup() {
     resolver: zodResolver(signupBody),
   });
 
-  const verifyOTP = async () => {
-    console.log("OTP verify successful");
-  };
-
   const submitData: SubmitHandler<SignupBody> = async (data) => {
-    // if (sendOTP.data.status === "pending") {
-    //   const verifyOTP = await axios.post(
-    //     `/api/verify-phone/verify-otp?otp=${otp}&phoneNumber=${data.phoneNumber}`,
-    //   );
-    //   if (verifyOTP.data.status === "approved") {
-    //     const response = await axios.post("/api/signup", data);
-    //     console.log(response.data);
-    //   }
-    // }
+    try {
+      const createAccount = await axios.post("/api/signup", data);
+      console.log("Account: ", createAccount);
+    } catch (errors) {
+      console.log(errors);
+    }
 
-    const createAccount = await axios.post("/api/signup", data);
-    console.log("Account: ", createAccount);
+    try {
+      const response = await axios.post("/api/verify-phone/send-otp", data);
 
-    const response = await axios.post("/api/verify-phone/send-otp", data);
-
-    if (response.data) {
-      router.push(`/verify-otp?phoneNumber=${data.phoneNumber}`);
-      return toast.success("OTP send successful");
+      if (response.data) {
+        router.push(`/verify-otp?phoneNumber=${data.phoneNumber}`);
+        return toast.success("OTP send successful");
+      }
+    } catch (errors) {
+      console.log(errors);
     }
   };
 
@@ -73,34 +63,42 @@ export default function Signup() {
                 register={register}
                 name={"firstName"}
               />
-              {errors.firstName && <div>{errors.firstName.message}</div>}
+              {errors.firstName && (
+                <div className="text-red-500 text-sm">
+                  {errors.firstName.message}
+                </div>
+              )}
               <Input
                 placeholder="Last Name"
                 register={register}
                 name={"lastName"}
               />
-              {errors.lastName && <div>{errors.lastName.message}</div>}
-              {/* <form className="flex gap-2" onSubmit={handleSubmit(sendOTP)} action=""> */}
+              {errors.lastName && (
+                <div className="text-red-500 text-sm">
+                  {errors.lastName.message}
+                </div>
+              )}
               <Input
                 placeholder="Phone Number"
                 register={register}
                 name={"phoneNumber"}
               />
 
-              {/* <button
-                className="rounded bg-blue-500 text-white w-16 "
-                type="submit"
-              >
-                SendOTP
-              </button> */}
-              {/* </form> */}
-              {errors.phoneNumber && <div>{errors.phoneNumber.message}</div>}
+              {errors.phoneNumber && (
+                <div className="text-red-500 text-sm">
+                  {errors.phoneNumber.message}
+                </div>
+              )}
               <Input
                 placeholder="Password"
                 register={register}
                 name={"password"}
               />
-              {errors.password && <div>{errors.password.message}</div>}
+              {errors.password && (
+                <div className="text-red-500 text-sm">
+                  {errors.password.message}
+                </div>
+              )}
 
               <Input
                 placeholder="Confirm Password"
@@ -108,24 +106,10 @@ export default function Signup() {
                 name={"confirmPassword"}
               />
               {errors.confirmPassword && (
-                <div>{errors.confirmPassword.message}</div>
+                <div className="text-red-500 text-sm">
+                  {errors.confirmPassword.message}
+                </div>
               )}
-              {/* <div className=" flex gap-2">
-                <input
-                  type="text"
-                  className="border border-black"
-                  placeholder="OTP"
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    setOTP(e.target.value)
-                  }
-                />
-                <button
-                  className="rounded bg-blue-500 text-white w-16 "
-                  onClick={verifyOTP}
-                >
-                  Verify
-                </button>
-              </div>*/}
             </CardContent>
 
             <CardFooter className="flex justify-center items-center">

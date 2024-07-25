@@ -13,7 +13,7 @@ export default function ({
       <div className="flex flex-col">
         <Input
           placeholder={placeholder}
-          className=" w-full"
+          className="w-full"
           {...register(name)}
         />
       </div>

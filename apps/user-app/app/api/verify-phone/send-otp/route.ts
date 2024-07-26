@@ -12,10 +12,10 @@ async function SendOTP(req: NextRequest) {
 
   const { phoneNumber } = userInfo;
   try {
-    console.log("Api phoneNUmber", phoneNumber)
+    console.log("Api phoneNUmber", phoneNumber);
 
     console.log("HERE");
-    
+
     const twilioResponse = await client.verify.v2
       .services(serviceID)
       .verifications.create({

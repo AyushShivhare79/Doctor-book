@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { UploadImage } from "../../lib/upload-image";
+import prisma from "@repo/db/client";
 
 export const POST = async (req: NextRequest) => {
   const formData = await req.formData();
@@ -11,5 +12,7 @@ export const POST = async (req: NextRequest) => {
   const data: any = await UploadImage(image, "admin-images");
   console.log("I am data: ", data);
 
-  return NextResponse.json({ msg: image, url: data.url }, { status: 200 });
+  // prisma.
+
+  return NextResponse.json({ URL: data.url }, { status: 200 });
 };

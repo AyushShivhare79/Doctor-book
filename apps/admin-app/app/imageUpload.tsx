@@ -1,10 +1,7 @@
 "use client";
 
-import axios from "axios";
 import { ChangeEvent, useState } from "react";
-import { Cloudinary } from "@cloudinary/url-gen";
-import { Resize } from "@cloudinary/url-gen/actions";
-import { scale } from "@cloudinary/url-gen/actions/resize";
+import axios from "axios";
 
 const ImageUpload = () => {
   const [image, setFile] = useState<File | null>();
@@ -18,13 +15,6 @@ const ImageUpload = () => {
       setPreview(URL.createObjectURL(e.target.files[0]));
     }
   };
-
-  // const CloudinaryImage = new Cloudinary({
-  //   cloud: {
-  //     cloudName: process.env.cloud_name,
-  //   },
-  // });
-
   console.log("Image: ", image);
 
   const handleSubmit = async (e: any) => {
@@ -41,29 +31,29 @@ const ImageUpload = () => {
 
       const data: any = await response;
       console.log("DATA: ", data);
-     await localStorage.setItem("URL", data.url);
+      await localStorage.setItem("URL", data.url);
     } catch (error: any) {
       console.log("Error: ", error.message);
     }
   };
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="dp">Image</label>
-        <img
-          className="max-w-[200px] min-w-[200px] max-h-[200px] min-h-[200px] object-cover rounded-full"
-          alt="preview image"
-          src={preview}
-        />
-        <input
-          id="dp"
-          type="file"
-          className="hidden"
-          onChange={handleFileChange}
-          placeholder="upload image"
-        />
-        <button>Upload</button>
-      </form>
+      {/* <form onSubmit={handleSubmit}> */}
+      <label htmlFor="dp">Image</label>
+      <img
+        className="max-w-[200px] min-w-[200px] max-h-[200px] min-h-[200px] object-cover rounded-full"
+        alt="preview image"
+        src={preview}
+      />
+      <input
+        id="dp"
+        type="file"
+        className="hidden"
+        onChange={handleFileChange}
+        placeholder="upload image"
+      />
+      <button onClick={handleSubmit}>Save</button>
+      {/* </form> */}
     </>
   );
 };

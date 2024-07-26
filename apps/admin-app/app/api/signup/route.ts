@@ -24,9 +24,9 @@ export const signupBody = z
       .min(2, { message: "Address should have atleast 2 characters" }),
     phoneNumber: z
       .string()
-      .min(10, { message: "Phone number must have 10 digits" })
-      .max(10, { message: "Phone number must have 10 digits" }),
-    fees: z.string().min(1, { message: "Fess can't be empty" }),
+      .min(9, { message: "Phone number must have 10 digits" })
+      .max(11, { message: "Phone number must have 10 digits" }),
+    fees: z.string().min(1, { message: "Invalid number" }),
     password: z
       .string()
       .min(7, { message: "Password must be more than 7" })
@@ -47,21 +47,12 @@ async function Signup(req: NextRequest) {
   const userInfo = await req.json();
 
   const { success } = signupBody.safeParse(userInfo);
-
   if (!success) {
     return NextResponse.json({ msg: "Invalid credentials" });
   }
 
-  const {
-    firstName,
-    middleName,
-    lastName,
-    emailId,
-    address,
-    phoneNumber,
-    fees,
-    password,
-  } = await userInfo;
+  const { firstName, lastName, emailId, address, phoneNumber, fees, password } =
+    await userInfo;
 
   const userExist = await prisma.admin.findFirst({
     where: {
@@ -70,25 +61,25 @@ async function Signup(req: NextRequest) {
   });
 
   if (userExist) {
-    return NextResponse.json({ msg: "User already exists!" });
+    return NextResponse.json({ msg: "User already exists!", value: false });
   }
 
   try {
     const response = await prisma.admin.create({
       data: {
         firstName,
-        middleName: "OH",
         lastName,
         emailId,
         address,
         phoneNumber,
-        fees,
+        fees: Number(fees),
         password,
       },
     });
     return NextResponse.json(response);
-  } catch (error) {
+  } catch (error: any) {
     console.log(error);
+    return NextResponse.json({ msg: error.message });
   }
 }
 

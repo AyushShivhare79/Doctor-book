@@ -29,21 +29,27 @@ model Admin {
   phoneNumber String    @unique
   firstName   String
   lastName    String
-  middleName  String?
+  image       String? 
+  // middleName  String?
   emailId     String
   address     String
   fees        Int
   password    String
   booking     Booking[]
 
+  // image       image[]
+
   // @@fulltext([firstName, lastName, category, experience, address, fees ])
 }
 
-model image {
-  id       Int    @id @default(autoincrement())
-  imageUrl String
-  publicId String
-}
+// You can create this so,Admin can have multiple images
+// model image {
+//   id       Int    @id @default(autoincrement())
+//   imageUrl String
+//   publicId String
+//   doctorId Int
+//   doctor   Admin  @relation(fields: [doctorId], references: [id])
+// }
 
 model Booking {
   id       Int      @id @default(autoincrement())

@@ -22,7 +22,7 @@ export default function () {
 
   const verifyOTP = async () => {
     const response = await axios.post(
-      `/api/verify-phone/verify-otp?otp=${otp}&phoneNumber=${phoneNumber}`
+      `/api/verify-phone/verify-otp?otp=${otp}&phoneNumber=${phoneNumber}`,
     );
     if (response.data) {
       toast.success("User verified successful");

@@ -25,11 +25,7 @@ export default function ({
         <Card>
           <CardHeader>
             <CardTitle>
-              <img
-                className="max-w-[250px] min-w-[250px] max-h-[250px] min-h-[250px] object-cover"
-                src={d.image}
-                alt=""
-              />
+              <img className="object-cover" src={d.image} alt="Image" />
             </CardTitle>
             <CardDescription></CardDescription>
           </CardHeader>
@@ -46,49 +42,14 @@ export default function ({
               <div>{AddIcon}</div>
               <div>{d.address}</div>
             </div>
-
-            <div className="flex gap-5">
-              <div>Fees: {d.fees} Rs</div>
-            </div>
           </CardContent>
-          <CardFooter>
+          <CardFooter className="flex justify-between items-center">
+            <div className="flex gap-5">
+              <div>Only {d.fees}rs</div>
+            </div>
             <Button id={d.id} btnName="BOOK NOW" />
           </CardFooter>
         </Card>
-
-        // <div className="border border-black rounded-lg p-10">
-        //   <div>
-        //     {/* <Image
-        //       src={d.image}
-        //       width={500}
-        //       height={500}
-        //       alt="Picture of the author"
-        //     />*/}
-        //     <img
-        //       className="max-w-[200px] min-w-[200px] max-h-[200px] min-h-[200px] object-cover"
-        //       src={d.image}
-        //       alt=""
-        //     />
-        //   </div>
-        //   <div>
-        //     {d.firstName} {d.lastName}
-        //   </div>
-
-        //   <div className="flex gap-2">
-        //     <div>{Category}</div>
-        //     <div>{d.category}</div>
-        //   </div>
-
-        //   <div className="flex gap-2">
-        //     <div>{AddIcon}</div>
-        //     <div>{d.address}</div>
-        //   </div>
-
-        //   <div className="flex gap-5">
-        //     <div>Fees: {d.fees} Rs</div>
-        //     <Button id={d.id} btnName="BookNow" />
-        //   </div>
-        // </div>
       ))}
     </>
   );

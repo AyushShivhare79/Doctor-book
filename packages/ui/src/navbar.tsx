@@ -16,6 +16,7 @@ export default function ({
   return (
     <>
       <div className="flex justify-between items-center px-10 pt-2 pb-2 border-b-2">
+        
         <div className="text-2xl font-medium">Medico</div>
         {/* <div>
           <Image src={Logo} alt="Logo" />

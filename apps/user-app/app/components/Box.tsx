@@ -15,7 +15,8 @@ export default function () {
   return (
     <>
       <div className="flex justify-center flex-col h-80 bg-blue-950">
-        <div className="flex justify-center gap-5">
+        {/* <div className="flex justify-center gap-5"> */}
+        <div className="flex flex-col justify-center items-center gap-5 sm:flex sm:flex-row sm:justify-center sm:gap-5 ">
           <SelectData />
           <SelectData />
           <Input />

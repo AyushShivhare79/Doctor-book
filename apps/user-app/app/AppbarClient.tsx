@@ -1,6 +1,7 @@
 "use client";
 
-import Navbar from "@repo/ui/navbar";
+import MenuBar from "./components/MenuBar";
+import NavBar from "./components/NavBar";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function () {
@@ -9,7 +10,7 @@ export default function () {
   return (
     <>
       <div>
-        <Navbar
+        <MenuBar
           user={session.data?.user}
           onSignin={() => {
             signIn();

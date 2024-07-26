@@ -1,7 +1,8 @@
 "use client";
 
-import { Button } from "./components/ui/button";
+import { Button } from "@repo/ui/button"; 
 import { useRouter } from "next/navigation";
+import MenuBar from "./MenuBar";
 
 export default function ({
   user,
@@ -9,7 +10,7 @@ export default function ({
   onSignout,
 }: {
   onSignin: any;
-  onSignout: any;
+  onSignout: any; 
   user: any;
 }) {
   const router = useRouter();
@@ -21,7 +22,9 @@ export default function ({
           <Image src={Logo} alt="Logo" />
         </div> */}
 
-      
+    {/* remove this from package */}
+
+    {/* <MenuBar/> */}
 
 
         {/* From here  */}

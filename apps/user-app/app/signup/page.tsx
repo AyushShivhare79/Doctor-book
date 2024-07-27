@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@repo/ui/button";
+import { PulseLoader } from "react-spinners";
 import {
   Card,
   CardContent,
@@ -16,11 +17,12 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-
-import { ErrorMessage } from "@hookform/error-message";
+import { useState } from "react";
 
 export default function Signup() {
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
+
   const {
     register,
     handleSubmit,
@@ -30,6 +32,7 @@ export default function Signup() {
   });
 
   const submitData: SubmitHandler<SignupBody> = async (data) => {
+    setLoading(true);
     try {
       const createAccount = await axios.post("/api/signup", data);
       console.log("Account: ", createAccount);
@@ -42,6 +45,7 @@ export default function Signup() {
 
       if (response.data) {
         router.push(`/verify-otp?phoneNumber=${data.phoneNumber}`);
+        setLoading(false);
         return toast.success("OTP send successful");
       }
     } catch (errors) {
@@ -52,27 +56,22 @@ export default function Signup() {
   const fieldArr = [
     {
       placeholder: "First Name",
-      register: register,
       name: "firstName",
     },
     {
       placeholder: "Last Name",
-      register: register,
       name: "lastName",
     },
     {
       placeholder: "Phone Number",
-      register: register,
       name: "phoneNumber",
     },
     {
       placeholder: "Password",
-      register: register,
       name: "password",
     },
     {
       placeholder: "Confirm Password",
-      register: register,
       name: "confirmPassword",
     },
   ];
@@ -92,88 +91,33 @@ export default function Signup() {
                 <div>
                   <Input
                     placeholder={value.placeholder}
-                    register={value.register}
+                    register={register}
                     name={value.name}
                   />
-
                   {
                     // @ts-ignore
-                  errors?.[value.name] && (
-                    <div className="text-red-500 text-sm">
-                      {
-                      // @ts-ignore
-                      errors?.[value.name].message}
-                    </div>
-                  )}
-
-
-
-                  {/* <div className="text-red-500 text-xs">
-                    <ErrorMessage
-                      errors={errors}
-                      // @ts-ignore
-                      name={value.name}
-                    />
-                  </div> */}
+                    errors?.[value.name] && (
+                      <div className="text-red-500 text-xs">
+                        {
+                          // @ts-ignore
+                          errors?.[value.name].message
+                        }
+                      </div>
+                    )
+                  }
                 </div>
               ))}
-
-              {/* <Input
-                placeholder="First Name"
-                register={register}
-                name={"firstName"}
-              />
-              {errors.firstName && (
-                <div className="text-red-500 text-sm">
-                  {errors.firstName.message}
-                </div>
-              )}
-              <Input
-                placeholder="Last Name"
-                register={register}
-                name={"lastName"}
-              />
-              {errors.lastName && (
-                <div className="text-red-500 text-sm">
-                  {errors.lastName.message}
-                </div>
-              )}
-              <Input
-                placeholder="Phone Number"
-                register={register}
-                name={"phoneNumber"}
-              />
-
-              {errors.phoneNumber && (
-                <div className="text-red-500 text-sm">
-                  {errors.phoneNumber.message}
-                </div>
-              )}
-              <Input
-                placeholder="Password"
-                register={register}
-                name={"password"}
-              />
-              {errors.password && (
-                <div className="text-red-500 text-sm">
-                  {errors.password.message}
-                </div>
-              )}
-
-              <Input
-                placeholder="Confirm Password"
-                register={register}
-                name={"confirmPassword"}
-              />
-              {errors.confirmPassword && (
-                <div className="text-red-500 text-sm">
-                  {errors.confirmPassword.message}
-                </div>
-              )} */}
             </CardContent>
             <CardFooter className="flex justify-center items-center">
-              <Button type="submit" className="bg-black text-white w-full">
-                Create Account
+              <Button
+                type="submit"
+                className="flex gap-3 bg-blue-700 text-white w-full"
+              >
+                {loading ? (
+                  <PulseLoader color="#ffffff" className="absolute" size={10} />
+                ) : (
+                  <div> Create Account </div>
+                )}
               </Button>
             </CardFooter>
           </form>

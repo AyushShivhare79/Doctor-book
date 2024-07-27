@@ -2,39 +2,23 @@ import { useSession } from "next-auth/react";
 import AppbarClient from "./AppbarClient";
 import Box from "./components/Box";
 import DoctorCard from "./components/DoctorCard";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./lib/auth";
 
-export default function Page(): JSX.Element {
-  // const { data: session } = useSession();
-
-  // if (session) {
+export default async function Page() {
+  const session = await getServerSession(authOptions);
+  console.log("This is your session: ", session);
+  if (!session) {
+    redirect("/api/auth/signin");
+  }
   return (
     <>
       <AppbarClient />
-      {/* <MenuPage /> */}
       <Box />
       <div>
         <DoctorCard />
       </div>
     </>
   );
-  // }
-
-  // return (
-  //   <>
-  //     <div>Access Denied</div>
-  //   </>
-  // );
 }
-
-// export async function getServerSideProps(context) {
-//   return {
-//     props: {
-//       session: await getServerSession(
-//         context.req,
-//         context.res,
-//         authOptions
-//       ),
-//     },
-//   }
-// }

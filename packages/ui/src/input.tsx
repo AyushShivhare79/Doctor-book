@@ -6,7 +6,7 @@ export default function ({
 }: {
   placeholder: string;
   register: any;
-  name: any;
+  name: string;
 }) {
   return (
     <>

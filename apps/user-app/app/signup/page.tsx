@@ -96,9 +96,13 @@ export default function Signup() {
                     name={value.name}
                   />
 
-                  {errors?.{value.name} && (
+                  {
+                    // @ts-ignore
+                  errors?.[value.name] && (
                     <div className="text-red-500 text-sm">
-                      {errors.[value.name].message}
+                      {
+                      // @ts-ignore
+                      errors?.[value.name].message}
                     </div>
                   )}
 

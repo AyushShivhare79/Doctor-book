@@ -12,11 +12,11 @@ export default function () {
       <div>
         <MenuBar
           user={session.data?.user}
-          onSignin={() => {
-            signIn();
+          onSignin={async () => {
+            await signIn("credentials", { callbackurl: "/dashboard" });
           }}
-          onSignout={() => {
-            signOut({ callbackUrl: "/api/auth/signin" });
+          onSignout={async () => {
+            await signOut({ callbackUrl: "/api/auth/signin" });
           }}
         />
       </div>

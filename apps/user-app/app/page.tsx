@@ -16,7 +16,7 @@ export default function Page(): JSX.Element {
   return (
     <>
       <AppbarClient />
-      <MenuPage />
+      {/* <MenuPage /> */}
       <Box />
       <div>
         <DoctorCard />

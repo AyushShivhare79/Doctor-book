@@ -14,27 +14,14 @@ import {
 export default function () {
   return (
     <>
-      <div className="flex justify-center flex-col h-80 bg-blue-950">
-        {/* <div className="flex justify-center gap-5"> */}
-        <div className="flex flex-col justify-center items-center gap-5 sm:flex sm:flex-row sm:justify-center sm:gap-5 ">
-          <SelectData />
-          <SelectData />
-          <Input />
-        </div>
+      <div className="  bg-blue-950 border border-red-600 flex flex-col justify-center items-center gap-5 sm:flex sm:flex-row sm:justify-center sm:gap-5 min-h-80 max-h-80">
+        <SelectData />
+        <SelectData />
+        <Input />
       </div>
     </>
   );
 }
-
-// export function InputWithButton() {
-//   return (
-//     <>
-//       <Input className="text-white" placeholder="Search Doctor..." />
-//       <Button className="bg-blue-600 text-white ">Search</Button>
-//     </>
-//   );
-// }
-
 export function SelectData() {
   return (
     <>

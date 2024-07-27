@@ -26,6 +26,7 @@
     "packages/*"
   ],
   "dependencies": {
+    "@hookform/error-message": "^2.0.1",
     "@hookform/resolvers": "^3.9.0",
     "@prisma/client": "^5.14.0",
     "axios": "^1.7.2",

@@ -17,6 +17,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
+import { ErrorMessage } from "@hookform/error-message";
+
 export default function Signup() {
   const router = useRouter();
   const {
@@ -47,18 +49,63 @@ export default function Signup() {
     }
   };
 
+  const fieldArr = [
+    {
+      placeholder: "First Name",
+      register: register,
+      name: "firstName",
+    },
+    {
+      placeholder: "Last Name",
+      register: register,
+      name: "lastName",
+    },
+    {
+      placeholder: "Phone Number",
+      register: register,
+      name: "phoneNumber",
+    },
+    {
+      placeholder: "Password",
+      register: register,
+      name: "password",
+    },
+    {
+      placeholder: "Confirm Password",
+      register: register,
+      name: "confirmPassword",
+    },
+  ];
+
   return (
     <>
       <div className="flex flex-col justify-center items-center h-screen">
-        <Card className="flex flex-col w-96">
+        <Card className="flex flex-col w-full sm:w-96 border">
           <CardHeader>
-            <CardTitle className="flex justify-center text-3xl">
+            <CardTitle className="flex justify-center font-mono text-3xl">
               Doctor Book
             </CardTitle>
           </CardHeader>
           <form onSubmit={handleSubmit(submitData)} className="form">
             <CardContent className="flex flex-col gap-5">
-              <Input
+              {fieldArr.map((value, index) => (
+                <div>
+                  <Input
+                    placeholder={value.placeholder}
+                    register={value.register}
+                    name={value.name}
+                  />
+                  <div className="text-red-500 text-xs">
+                    <ErrorMessage
+                      errors={errors}
+                      // @ts-ignore
+                      name={value.name}
+                    />
+                  </div>
+                </div>
+              ))}
+
+              {/* <Input
                 placeholder="First Name"
                 register={register}
                 name={"firstName"}
@@ -109,11 +156,10 @@ export default function Signup() {
                 <div className="text-red-500 text-sm">
                   {errors.confirmPassword.message}
                 </div>
-              )}
+              )} */}
             </CardContent>
-
             <CardFooter className="flex justify-center items-center">
-              <Button type="submit" className="bg-black text-white block">
+              <Button type="submit" className="bg-black text-white w-full">
                 Create Account
               </Button>
             </CardFooter>

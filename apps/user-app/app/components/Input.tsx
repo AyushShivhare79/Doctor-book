@@ -37,7 +37,7 @@ export default function () {
           console.log(response);
           return response;
         }}
-        className="text-white"
+        className="text-white w-auto"
         placeholder="Search Doctor..."
       />
       {/* <button

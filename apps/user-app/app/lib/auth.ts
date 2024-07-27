@@ -1,5 +1,7 @@
 import Credentials from "next-auth/providers/credentials";
 import prisma from "@repo/db/client";
+import { pages } from "next/dist/build/templates/app-page";
+import { signIn, signOut } from "next-auth/react";
 
 //zod validation or in custom page check where is it good?
 
@@ -49,9 +51,16 @@ export const authOptions = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
+    // async redirect({ url, baseUrl }) {
+    //   return baseUrl
+    // },
     async session({ session, token }: any) {
       session.user.id = token.sub;
       return session;
     },
+  },
+  pages: {
+    signIn: "/signin",
+    signOut: "/signin",
   },
 };

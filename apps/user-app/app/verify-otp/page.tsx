@@ -39,7 +39,7 @@ export default function () {
       <div className="flex flex-col justify-center items-center h-screen">
         <Card className="flex justify-center flex-col items-center p-10">
           <CardHeader>
-            <CardTitle className="text-3xl">Verify OTP</CardTitle>
+            <CardTitle className="font-mono text-3xl">Verify OTP</CardTitle>
           </CardHeader>
           <CardContent>
             <InputOTP

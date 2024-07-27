@@ -1,18 +1,13 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@repo/ui/card";
+import { useSession } from "next-auth/react";
 import AppbarClient from "./AppbarClient";
 import Box from "./components/Box";
 import DoctorCard from "./components/DoctorCard";
-import { Button } from "@repo/ui/button";
-import MenuPage from "./components/MenuPage";
+import { useRouter } from "next/navigation";
 
 export default function Page(): JSX.Element {
+  // const { data: session } = useSession();
+
+  // if (session) {
   return (
     <>
       <AppbarClient />
@@ -23,4 +18,23 @@ export default function Page(): JSX.Element {
       </div>
     </>
   );
+  // }
+
+  // return (
+  //   <>
+  //     <div>Access Denied</div>
+  //   </>
+  // );
 }
+
+// export async function getServerSideProps(context) {
+//   return {
+//     props: {
+//       session: await getServerSession(
+//         context.req,
+//         context.res,
+//         authOptions
+//       ),
+//     },
+//   }
+// }

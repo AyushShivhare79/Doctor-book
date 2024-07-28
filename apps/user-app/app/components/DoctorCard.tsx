@@ -6,7 +6,9 @@ const DoctorCard = async () => {
   const data = await getAdminData();
   // data.map((value, index) => console.log(value.firstName));
   console.log(
-    data.filter((value: any) => value.firstName.toLowerCase().includes("Ayush"))
+    data.filter((value: any) =>
+      value.firstName.toLowerCase().includes("Ayush"),
+    ),
   );
   return (
     <>

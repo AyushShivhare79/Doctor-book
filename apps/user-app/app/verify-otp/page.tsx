@@ -21,7 +21,7 @@ export default function () {
       const phoneNumber = searchParams.get("phoneNumber");
       setLoading(true);
       const response = await axios.post(
-        `/api/verify-phone/verify-otp?otp=${otp}&phoneNumber=${phoneNumber}`
+        `/api/verify-phone/verify-otp?otp=${otp}&phoneNumber=${phoneNumber}`,
       );
       // if (response.statusText === "OK") {
       console.log(response.data);

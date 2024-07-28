@@ -25,7 +25,11 @@ export default function ({
         <Card>
           <CardHeader>
             <CardTitle>
-              <img className="object-cover" src={d.image} alt="Image" />
+              <img
+                className="max-h-[200px] min-h-[200px] max-w-[200px] min-w-[200px] object-cover rounded-full"
+                src={d.image}
+                alt="Image"
+              />
             </CardTitle>
             <CardDescription></CardDescription>
           </CardHeader>

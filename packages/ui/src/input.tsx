@@ -10,13 +10,7 @@ export default function ({
 }) {
   return (
     <>
-      <div className="flex flex-col">
-        <Input
-          placeholder={placeholder}
-          className="w-full"
-          {...register(name)}
-        />
-      </div>
+      <Input placeholder={placeholder} className="w-full" {...register(name)} />
     </>
   );
 }

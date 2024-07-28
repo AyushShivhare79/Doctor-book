@@ -3,20 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./button": "./src/components/ui/button.tsx",
+    ".": "./src/index.ts",
     "./code": "./src/code.tsx",
     "./navbar": "./src/navbar.tsx",
     "./searchInput": "./src/searchInput.tsx",
-    "./card": "./src/components/ui/card.tsx",
-    "./input": "./src/components/ui/input.tsx",
-    "./select": "./src/components/ui/select.tsx",
-    "./table": "./src/components/ui/table.tsx",
-    "./sheet": "./src/components/ui/sheet.tsx",
-    "./alert-dialog": "./src/components/ui/alert-dialog.tsx",
     "./customSelect": "./src/select.tsx",
-    "./customInput": "./src/input.tsx",
-    "./input-otp": "./src/components/ui/input-otp.tsx",
-    "./form": "./src/components/ui/form.tsx"
+    "./customInput": "./src/input.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
@@ -49,7 +41,9 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "input-otp": "^1.2.4",
+    "next-themes": "^0.3.0",
     "react-hook-form": "^7.52.1",
+    "sonner": "^1.5.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.8"

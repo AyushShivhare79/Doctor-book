@@ -1,5 +1,5 @@
 import Input from "./Input";
-import { Button } from "@repo/ui/button";
+import { Button } from "@repo/ui";
 
 import SearchInput from "@repo/ui/searchInput";
 
@@ -9,7 +9,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@repo/ui/select";
+} from "@repo/ui";
 
 export default function () {
   return (

@@ -1,19 +1,19 @@
 "use client";
 
-import { Button } from "@repo/ui/button";
-import { storeData } from "../lib/actions/getAdminData";
-import { toast } from "react-toastify";
+import { Button } from "@repo/ui";
 import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@repo/ui/alert-dialog";
+} from "@repo/ui";
+
+import { storeData } from "../lib/actions/getAdminData";
+import { toast } from "react-toastify";
 
 export default function ({ id, btnName }: any) {
   return (

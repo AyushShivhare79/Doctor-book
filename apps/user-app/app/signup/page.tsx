@@ -1,14 +1,8 @@
 "use client";
 
-import { Button } from "@repo/ui/button";
+import { Button } from "@repo/ui";
 import { PulseLoader } from "react-spinners";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@repo/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@repo/ui";
 
 import Input from "@repo/ui/customInput";
 import axios from "axios";
@@ -16,10 +10,15 @@ import { signupBody, SignupBody } from "../api/signup/route";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
+
 import { useState } from "react";
+import { toast } from "react-toastify";
+
+// import { useToast } from "@repo/ui";
 
 export default function Signup() {
+  // const { toast } = useToast();
+
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -36,6 +35,13 @@ export default function Signup() {
     try {
       const createAccount = await axios.post("/api/signup", data);
       console.log("Account: ", createAccount);
+
+      // Uncomment this it's working fine
+
+      if (createAccount.data.msg === "User already exists!") {
+        setLoading(false);
+        return toast.error("User already exists!");
+      }
     } catch (errors) {
       console.log(errors);
     }
@@ -49,7 +55,9 @@ export default function Signup() {
         return toast.success("OTP send successful");
       }
     } catch (errors) {
-      console.log(errors);
+      setLoading(false);
+      toast.error("Internal server error");
+      return console.log(errors);
     }
   };
 

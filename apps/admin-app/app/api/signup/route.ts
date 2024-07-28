@@ -26,7 +26,7 @@ export const signupBody = z
       .string()
       .min(9, { message: "Phone number must have 10 digits" })
       .max(11, { message: "Phone number must have 10 digits" }),
-    fees: z.string().min(1, { message: "Invalid number" }),
+    fees: z.string().min(1, { message: "Type more" }),
     password: z
       .string()
       .min(7, { message: "Password must be more than 7" })

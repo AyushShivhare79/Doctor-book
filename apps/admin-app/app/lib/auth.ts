@@ -37,13 +37,15 @@ export const authOptions = {
           firstName: userExist.firstName,
           lastName: userExist.lastName,
           phoneNumber: userExist.phoneNumber,
-          fees: userExist.fees,
-          address: userExist.address,
-          category: userExist.category,
-          experience: userExist.experience,
         };
       },
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async session({ session, token }: any) {
+      session.user.id = token.sub;
+      return session;
+    },
+  },
 };

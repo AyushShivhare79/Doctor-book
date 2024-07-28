@@ -44,6 +44,7 @@ export default function () {
     const response = await axios.post("/api/signup", data);
 
     if (response.data.msg === "User already exists!") {
+      setLoading(false);
       toast.error("User already exists!");
     } else {
       // router.push("/dashboard");
@@ -87,7 +88,7 @@ export default function () {
   return (
     <>
       <div className="flex flex-col justify-center items-center h-screen">
-        <Card className="flex flex-col sm:w-[450px] sm:h-auto ">
+        <Card className="flex flex-col sm:w-[450px] sm:h-auto">
           {/* There is an issue with the title for doctor book */}
           <CardHeader>
             <CardTitle className="flex justify-center font-mono text-3xl">
@@ -97,12 +98,19 @@ export default function () {
 
           <form onSubmit={handleSubmit(submitData)}>
             <CardContent className="flex flex-col gap-5 p-10">
-              <label htmlFor="dp">Image</label>
-              <img
-                className="max-w-[150px] min-w-[150px] max-h-[150px] min-h-[150px] object-cover rounded-full"
-                alt="preview image"
-                src={preview}
-              />
+              <div className=" flex flex-col items-center gap-2">
+                <img
+                  className="max-w-[150px] min-w-[150px] max-h-[150px] min-h-[150px] object-cover rounded-full border border-black"
+                  alt="preview image"
+                  src={preview}
+                />
+                <label
+                  className="flex justify-center items-center bg-black text-white w-20 rounded-xl hover:cursor-pointer"
+                  htmlFor="dp"
+                >
+                  Upload
+                </label>
+              </div>
               <input
                 id="dp"
                 type="file"

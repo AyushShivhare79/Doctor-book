@@ -1,16 +1,17 @@
-import Image from "next/image";
-import { Card } from "@repo/ui";
-import { Code } from "@repo/ui/code";
+import { getServerSession } from "next-auth";
 import styles from "./page.module.css";
-import { Button } from "@repo/ui";
-import Signup from "./signup/page";
-import ImageUpload from "./imageUpload";
+import { authOptions } from "./lib/auth";
+import { redirect } from "next/navigation";
 
-export default function Page(): JSX.Element {
+export default async function Page() {
+  const session = await getServerSession(authOptions);
+  console.log("This is your session: ", session);
+  if (!session) {
+    redirect("/api/auth/signin");
+  }
   return (
     <>
-      <div>{/* <Signup /> */}</div>
-      <ImageUpload />
+      <div>Home</div>
     </>
   );
 }

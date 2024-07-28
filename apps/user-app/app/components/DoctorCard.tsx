@@ -1,8 +1,13 @@
 import Card from "./Card";
 import { getAdminData } from "../lib/actions/getAdminData";
+import Input from "./Input";
 
 const DoctorCard = async () => {
   const data = await getAdminData();
+  // data.map((value, index) => console.log(value.firstName));
+  console.log(
+    data.filter((value: any) => value.firstName.toLowerCase().includes("Ayush"))
+  );
   return (
     <>
       <div className="flex justify-center pt-5">

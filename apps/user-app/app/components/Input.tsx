@@ -1,59 +1,20 @@
 "use client";
 
-import { Input } from "@repo/ui/input";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { Input } from "@repo/ui";
+import { ChangeEvent, useState } from "react";
 
-export default function () {
-  // const [searchQuery, setSearchQuery] = useState("");
+export default function ({ data }: { data: any }) {
+  const [text, setText] = useState<string>();
 
-  // const onSearch = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   const encodedSearchQuery = encodeURI(searchQuery);
-  //   console.log("current query", encodedSearchQuery);
-  // };
-
-  // const handleFilter = (e: any) => {
-  //   e.preventDefault();
-  // };
-
-  // useEffect(() => {});
-
-  const [search, setSearch] = useState("");
+  console.log(data);
 
   return (
     <>
-      {/* <form onSubmit={onSearch}> */}
       <Input
-        // onChange={(e) => setSearch(e.target.value)}
-        onChange={async (e: any) => {
-          setSearch(e.target.value);
-          const response = await axios.post(
-            "http://localhost:3001/api/search",
-            {
-              search,
-            },
-          );
-          console.log(response);
-          return response;
-        }}
         className="text-white w-auto"
         placeholder="Search Doctor..."
+        onChange={(e: ChangeEvent<HTMLInputElement>) => setText(e.target.value)}
       />
-      {/* <button
-        onClick={async (e: any) => {
-          const response = await axios.post(
-            "http://localhost:3001/api/search",
-            {
-              search,
-            }
-          );
-          console.log(response);
-        }}
-      >
-        adf
-      </button> */}
-      {/* </form> */}
     </>
   );
 }

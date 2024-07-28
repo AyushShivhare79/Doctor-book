@@ -1,4 +1,4 @@
-import { Button } from "@repo/ui/button";
+import { Button } from "@repo/ui";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 

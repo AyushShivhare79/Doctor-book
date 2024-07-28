@@ -17,7 +17,7 @@ export default function () {
       <div className="  bg-blue-950 border border-red-600 flex flex-col justify-center items-center gap-5 sm:flex sm:flex-row sm:justify-center sm:gap-5 min-h-80 max-h-80">
         <SelectData />
         <SelectData />
-        <Input />
+        {/* <Input /> */}
       </div>
     </>
   );

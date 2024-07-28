@@ -8,7 +8,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@repo/ui/card";
+} from "@repo/ui";
 
 export default function ({
   data,

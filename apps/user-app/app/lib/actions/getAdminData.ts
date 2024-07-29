@@ -4,13 +4,23 @@ import prisma from "@repo/db/client";
 
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth";
+import { NextRequest } from "next/server";
 
-export async function getAdminData() {
-  const users = await prisma.admin.findMany({});
-
+export async function getAdminData(query: String) {
   const response = await prisma.admin.findMany();
 
-  return response;
+  // if (query.length < 2) {
+  //   return response;
+  // }
+
+  const foundTracks = response.filter((track) => {
+    return (
+      track.firstName.toLowerCase().includes(query.toLowerCase()) ||
+      track.lastName.toLowerCase().includes(query.toLowerCase())
+    );
+  });
+
+  return foundTracks;
 }
 
 export async function storeData(id: Number) {

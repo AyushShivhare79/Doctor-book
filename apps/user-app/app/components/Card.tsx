@@ -1,6 +1,4 @@
-import Image from "next/image";
 import Button from "./Button";
-// import { Card } from "@repo/ui/card";
 import {
   Card,
   CardContent,
@@ -10,15 +8,13 @@ import {
   CardTitle,
 } from "@repo/ui";
 
-export default function ({
-  data,
-  AddIcon,
-  Category,
-}: {
+interface dataType {
   data: any;
   AddIcon: any;
   Category: any;
-}) {
+}
+
+export default function ({ data, AddIcon, Category }: dataType) {
   return (
     <>
       {data.map((d: any) => (

@@ -1,3 +1,5 @@
+"use client";
+
 import Input from "./Input";
 import { Button } from "@repo/ui";
 
@@ -10,15 +12,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@repo/ui";
+import { ChangeEvent, useState } from "react";
+import { string } from "zod";
+import DoctorCard from "./DoctorCard";
 
 export default function () {
+  const [text, setText] = useState<string>("");
+
   return (
     <>
       <div className="  bg-blue-950 border border-red-600 flex flex-col justify-center items-center gap-5 sm:flex sm:flex-row sm:justify-center sm:gap-5 min-h-80 max-h-80">
         <SelectData />
         <SelectData />
-        {/* <Input /> */}
+        <Input
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setText(e.target.value)
+          }
+        />
       </div>
+      <DoctorCard text={text} />
     </>
   );
 }

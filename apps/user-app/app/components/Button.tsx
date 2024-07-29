@@ -18,16 +18,11 @@ import { toast } from "react-toastify";
 export default function ({ id, btnName }: any) {
   return (
     <>
-      {/* <Button
-        onClick={async () => await storeData(id)}
-        className="border bg-blue-600 text-white"
-      >
-        {btnName}
-      </Button> */}
-
       <AlertDialog>
-        <AlertDialogTrigger>
-          <Button className="border bg-blue-600 text-white">{btnName}</Button>
+        <AlertDialogTrigger className="border bg-blue-600 text-white rounded-xl h-9 w-28">
+          {/* <Button > */}
+          {btnName}
+          {/* </Button> */}
         </AlertDialogTrigger>
         <AlertDialogContent className="bg-black text-white">
           <AlertDialogHeader>

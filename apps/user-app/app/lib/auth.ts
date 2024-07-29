@@ -2,6 +2,8 @@ import Credentials from "next-auth/providers/credentials";
 import prisma from "@repo/db/client";
 import { pages } from "next/dist/build/templates/app-page";
 import { signIn, signOut } from "next-auth/react";
+import { NextResponse } from "next/server";
+import { redirect } from "next/navigation";
 
 //zod validation or in custom page check where is it good?
 
@@ -31,15 +33,20 @@ export const authOptions = {
           },
         });
 
-        console.log("userInfo: ", userInfo);
+        // console.log("Before");
 
-        console.log("wait");
         // await new Promise((resolve) => setTimeout(resolve, 4000));
-        console.log("after");
+
+        // console.log("After");
+
         if (!userInfo) {
           return null;
         }
-        console.log(credentials);
+
+        if (!userInfo.verified) {
+          return null;
+        }
+
         return {
           id: userInfo.id.toString(),
           firstName: userInfo.firstName,

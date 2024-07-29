@@ -4,9 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 async function UpsertImage(req: NextRequest) {
   const { phoneNumber, url } = await req.json();
 
-  console.log("HERE");
-  console.log("PhoneNumber: ", phoneNumber);
-  console.log("URL: ", url);
   const response = await prisma.admin.update({
     where: {
       phoneNumber: phoneNumber,

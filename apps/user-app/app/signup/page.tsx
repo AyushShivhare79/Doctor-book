@@ -6,7 +6,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@repo/ui";
 
 import Input from "@repo/ui/customInput";
 import axios from "axios";
-import { signupBody, SignupBody } from "../api/signup/route";
+import { signupBody, SignupBody } from "../lib/validation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -34,7 +34,6 @@ export default function Signup() {
     setLoading(true);
     try {
       const createAccount = await axios.post("/api/signup", data);
-      console.log("Account: ", createAccount);
 
       // Uncomment this it's working fine
 

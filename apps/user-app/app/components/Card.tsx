@@ -43,7 +43,7 @@ export default function ({ data, AddIcon, Category }: dataType) {
               <div>{d.address}</div>
             </div>
           </CardContent>
-          <CardFooter className="flex justify-between items-center">
+          <CardFooter className="flex justify-between items-center gap-8 lg:gap-5">
             <div className="flex gap-5">
               <div>Only {d.fees}rs</div>
             </div>

@@ -3,10 +3,9 @@
 import { Button } from "@repo/ui";
 import { PulseLoader } from "react-spinners";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@repo/ui";
-import ImageUpload from "../imageUpload";
 
 import { SubmitHandler, useForm } from "react-hook-form";
-import { signupBody, SignupBody } from "../api/signup/route";
+import { signupBody, SignupBody } from "../lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "@repo/ui/customInput";
 import axios from "axios";
@@ -22,15 +21,12 @@ export default function () {
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log("Yes inside");
     if (e.target.files) {
       setFile(e.target.files[0]);
       // @ts-ignore
       setPreview(URL.createObjectURL(e.target.files[0]));
     }
   };
-
-  const router = useRouter();
 
   const {
     register,

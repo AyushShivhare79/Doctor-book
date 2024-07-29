@@ -22,7 +22,7 @@ export default function ({
       <div className="flex justify-between items-center px-10 pt-2 pb-2 border-b-2">
         <div className="text-2xl font-medium">Medico</div>
 
-        <div className="hidden sm:flex sm:gap-3 sm:items-center">
+        <div className="hidden md:flex md:gap-3 md:items-center">
           <div
             className=" hover:cursor-pointer"
             onClick={() => router.push("/")}
@@ -45,13 +45,13 @@ export default function ({
         </div>
 
         {/* This will only shown in mobile view */}
-        <div className=" sm:hidden" onClick={handleClick}>
+        <div className=" md:hidden" onClick={handleClick}>
           {open ? <XMark /> : <MenuIcon />}
         </div>
       </div>
 
       {open && (
-        <div className=" flex flex-col justify-center gap-5 items-center border border-black h-screen">
+        <div className="flex flex-col justify-center gap-5 items-center border border-black h-screen">
           <div
             className="hover:cursor-pointer"
             onClick={() => router.push("/")}

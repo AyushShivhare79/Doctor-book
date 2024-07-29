@@ -8,14 +8,10 @@ export default function ({ text }: { text: string }) {
   const [data, setData] = useState([{}]);
 
   // const data = await getAdminData("");
-  console.log("THisDAta", data);
 
   useEffect(() => {
-    console.log("Inside useEffect");
-
     const doIt = async () => {
       const response = await getAdminData(text);
-      console.log("Over here", data);
       setData(response);
     };
     doIt();
@@ -24,7 +20,7 @@ export default function ({ text }: { text: string }) {
   return (
     <>
       <div className="flex justify-center pt-5">
-        <div className="grid grid-cols-1 gap-5 sm:grid sm:grid-cols-4 sm:gap-5">
+        <div className="grid grid-cols-1 gap-5 lg:grid lg:grid-cols-4 lg:gap-5 md:grid-cols-2">
           <Card data={data} AddIcon={<Address />} Category={<Category />} />
         </div>
       </div>

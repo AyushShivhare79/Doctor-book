@@ -8,7 +8,6 @@ import { authOptions } from "./lib/auth";
 
 export default async function Page() {
   const session = await getServerSession(authOptions);
-  console.log("This is your session: ", session);
   if (!session) {
     redirect("/api/auth/signin");
   }

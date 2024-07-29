@@ -16,7 +16,6 @@ export default async function () {
   const data = await axios.post("http://localhost:3001/api/appointment", {
     userId: session.user.id,
   });
-  console.log("data hu vro: ", data.data);
 
   return (
     <>

@@ -8,14 +8,12 @@ const ImageUpload = () => {
   const [preview, setPreview] = useState<any>();
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log("Yes inside");
     if (e.target.files) {
       setFile(e.target.files[0]);
       // @ts-ignore
       setPreview(URL.createObjectURL(e.target.files[0]));
     }
   };
-  console.log("Image: ", image);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -26,15 +24,11 @@ const ImageUpload = () => {
       const formdata = new FormData();
       formdata.append("Image", image);
 
-      console.log("HERE");
       const response = await axios.post("/api/upload-image", formdata);
 
       const data: any = await response;
-      console.log("DATA: ", data);
       await localStorage.setItem("URL", data.url);
-    } catch (error: any) {
-      console.log("Error: ", error.message);
-    }
+    } catch (error: any) {}
   };
   return (
     <>

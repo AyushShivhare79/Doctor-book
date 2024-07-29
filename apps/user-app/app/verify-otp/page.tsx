@@ -3,47 +3,51 @@
 import { Button, InputOTP, InputOTPGroup, InputOTPSlot } from "@repo/ui";
 import { Suspense, useEffect, useState } from "react";
 import axios from "axios";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@repo/ui";
 import { toast } from "react-toastify";
 import { PulseLoader } from "react-spinners";
 
 export default function () {
-  // const { data: session, status } = useSession()
-
-  // if (status === "loading") {
-  //   return <p>Loading...</p>
-  // }
-
-  // if (status === "unauthenticated") {
-  //   return <p>Access Denied</p>
-  // }
-
-  // useEffect(() => {
-  //   if()
-  // })
-
   const [otp, setOtp] = useState<string>();
+  const [phoneNumber, setPhoneNumber] = useState<string | null>();
   const [loading, setLoading] = useState<boolean>(false);
   const searchParams = useSearchParams();
 
+  const router = useRouter();
+
+  useEffect(() => {
+    const response = searchParams.get("phoneNumber");
+
+    if (phoneNumber === null) {
+      router.push("/signup");
+    }
+    setPhoneNumber(response);
+  }, [searchParams, phoneNumber]);
+
+  // const phoneNumber = "464656564";
   const verifyOTP = async () => {
-    // if (!phoneNumber) {
-    //   return toast.error("Phone number not found");
-    // }
     try {
-      const phoneNumber = searchParams.get("phoneNumber");
       setLoading(true);
       const response = await axios.post(
-        `/api/verify-phone/verify-otp?otp=${otp}&phoneNumber=${phoneNumber}`,
+        `/api/verify-phone/verify-otp?otp=${otp}&phoneNumber=${phoneNumber}`
       );
+      console.log("response: ", response.data);
+      if (response.data.msg === "User not exists!") {
+        toast.error("User not exists!");
+        return router.push("/signup");
+      }
+      if (response.data.msg === "Your number is already verified") {
+        toast.error("Your number is already verified");
+        return router.push("/api/auth/signin");
+      }
       // if (response.statusText === "OK") {
       if (response.data.sent) {
         setLoading(false);
         toast.success("OTP verify successful");
       } else {
         setLoading(false);
-        return toast("Wrong OTP");
+        return toast.error("Wrong OTP");
       }
     } catch (error) {
       setLoading(false);
@@ -55,13 +59,12 @@ export default function () {
     <>
       {/* Use validation for OTP as well */}
 
-      {JSON.stringify(otp)}
-      <Suspense>
-        <div className="flex flex-col justify-center items-center h-screen">
-          <Card className="flex justify-center flex-col items-center p-10">
-            <CardHeader>
-              <CardTitle className="font-mono text-3xl">Verify OTP</CardTitle>
-            </CardHeader>
+      <div className="flex flex-col justify-center items-center h-screen">
+        <Card className="flex justify-center flex-col items-center p-10">
+          <CardHeader>
+            <CardTitle className="font-mono text-3xl">Verify OTP</CardTitle>
+          </CardHeader>
+          <Suspense>
             <CardContent>
               <InputOTP
                 maxLength={6}
@@ -90,9 +93,9 @@ export default function () {
                 )}
               </Button>
             </CardFooter>
-          </Card>
-        </div>
-      </Suspense>
+          </Suspense>
+        </Card>
+      </div>
     </>
   );
 }

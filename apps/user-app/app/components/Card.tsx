@@ -17,13 +17,13 @@ interface dataType {
 export default function ({ data, AddIcon, Category }: dataType) {
   return (
     <>
-      {data.map((d: any) => (
+      {data.map((value: any) => (
         <Card>
           <CardHeader>
             <CardTitle>
               <img
                 className="max-h-[200px] min-h-[200px] max-w-[200px] min-w-[200px] object-cover rounded-full"
-                src={d.image}
+                src={value.image}
                 alt="Image"
               />
             </CardTitle>
@@ -31,7 +31,7 @@ export default function ({ data, AddIcon, Category }: dataType) {
           </CardHeader>
           <CardContent>
             <div className=" text-2xl font-mono">
-              {d.firstName} {d.lastName}
+              {value.firstName} {value.lastName}
             </div>
             <div className="flex gap-2">
               <div>{Category}</div>
@@ -40,14 +40,14 @@ export default function ({ data, AddIcon, Category }: dataType) {
 
             <div className="flex gap-2">
               <div>{AddIcon}</div>
-              <div>{d.address}</div>
+              <div>{value.address}</div>
             </div>
           </CardContent>
           <CardFooter className="flex justify-between items-center gap-8 lg:gap-5">
             <div className="flex gap-5">
-              <div>Only {d.fees}rs</div>
+              <div>Only {value.fees}rs</div>
             </div>
-            <Button id={d.id} btnName="BOOK NOW" />
+            <Button id={value.id} btnName="BOOK NOW" />
           </CardFooter>
         </Card>
       ))}

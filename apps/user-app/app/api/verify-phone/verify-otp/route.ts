@@ -14,6 +14,20 @@ async function VerifyOTP(request: NextRequest) {
     const otp = searchParams.get("otp") as string;
     const phoneNumber = searchParams.get("phoneNumber") as string;
 
+    const response = await prisma.user.findFirst({
+      where: {
+        phoneNumber,
+      },
+    });
+
+    if (!response?.phoneNumber) {
+      return NextResponse.json({ msg: "User not exists!" });
+    }
+
+    if (response?.verified) {
+      return NextResponse.json({ msg: "Your number is already verified" });
+    }
+
     const twilioResponse = await client.verify.v2
       .services(serviceID)
       .verificationChecks.create({

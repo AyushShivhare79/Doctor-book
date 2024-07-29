@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useSession } from "next-auth/react";
 
 // import { useToast } from "@repo/ui";
 
@@ -21,6 +22,13 @@ export default function Signup() {
 
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
+
+  const { data: session, status } = useSession();
+
+  // if (status === "authenticated") {
+  //   return router.push("/");
+  // }
+  // console.log("Iam session: ", session);
 
   const {
     register,

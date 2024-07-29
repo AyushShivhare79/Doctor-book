@@ -1,15 +1,26 @@
+"use client";
+
 import Card from "./Card";
 import { getAdminData } from "../lib/actions/getAdminData";
-import Input from "./Input";
+import { useEffect, useState } from "react";
 
-const DoctorCard = async () => {
-  const data = await getAdminData();
-  // data.map((value, index) => console.log(value.firstName));
-  console.log(
-    data.filter((value: any) =>
-      value.firstName.toLowerCase().includes("Ayush"),
-    ),
-  );
+export default function ({ text }: { text: string }) {
+  const [data, setData] = useState([{}]);
+
+  // const data = await getAdminData("");
+  console.log("THisDAta", data);
+
+  useEffect(() => {
+    console.log("Inside useEffect");
+
+    const doIt = async () => {
+      const response = await getAdminData(text);
+      console.log("Over here", data);
+      setData(response);
+    };
+    doIt();
+  }, [text]);
+
   return (
     <>
       <div className="flex justify-center pt-5">
@@ -19,7 +30,7 @@ const DoctorCard = async () => {
       </div>
     </>
   );
-};
+}
 
 export function Experience() {
   return (
@@ -87,5 +98,3 @@ export function Category() {
     </svg>
   );
 }
-
-export default DoctorCard;

@@ -16,9 +16,7 @@ export default async function Page() {
     <>
       <AppbarClient />
       <Box />
-      <div>
-        <DoctorCard />
-      </div>
+      {/* <DoctorCard/> */}
     </>
   );
 }

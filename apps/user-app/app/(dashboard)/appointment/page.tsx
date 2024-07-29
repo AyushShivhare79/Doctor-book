@@ -5,7 +5,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@repo/ui/table";
+} from "@repo/ui";
 import axios from "axios";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../lib/auth";

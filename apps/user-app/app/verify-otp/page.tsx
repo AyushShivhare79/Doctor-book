@@ -30,7 +30,7 @@ export default function () {
     try {
       setLoading(true);
       const response = await axios.post(
-        `/api/verify-phone/verify-otp?otp=${otp}&phoneNumber=${phoneNumber}`
+        `/api/verify-phone/verify-otp?otp=${otp}&phoneNumber=${phoneNumber}`,
       );
       console.log("response: ", response.data);
       if (response.data.msg === "User not exists!") {

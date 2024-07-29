@@ -4,9 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "db:reset": "prisma migrate reset",
+    "db:seed": "prisma db seed",
     "db:generate": "prisma generate",
     "db:push": "prisma db push --skip-generate",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "exports": {
     "./client": "./index.ts"

@@ -8,3 +8,4 @@ export * from "./components/ui/alert-dialog";
 export * from "./components/ui/input-otp";
 export * from "./components/ui/form";
 export * from "./components/ui/use-toast";
+export * from "./components/ui/skeleton";

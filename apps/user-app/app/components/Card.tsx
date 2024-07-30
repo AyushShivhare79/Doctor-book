@@ -18,7 +18,7 @@ export default function ({ data, AddIcon, Category }: dataType) {
   return (
     <>
       {data.map((value: any) => (
-        <Card>
+        <Card className="object-cover">
           <CardHeader>
             <CardTitle>
               <img
@@ -43,10 +43,10 @@ export default function ({ data, AddIcon, Category }: dataType) {
               <div>{value.address}</div>
             </div>
           </CardContent>
-          <CardFooter className="flex justify-between items-center gap-8 lg:gap-5">
-            <div className="flex gap-5">
-              <div>Only {value.fees}rs</div>
-            </div>
+          <CardFooter className="flex justify-between items-center gap-5 ">
+            {/* <div className="flex gap-5"> */}
+            <div>Only {value.fees}rs</div>
+            {/* </div> */}
             <Button id={value.id} btnName="BOOK NOW" />
           </CardFooter>
         </Card>

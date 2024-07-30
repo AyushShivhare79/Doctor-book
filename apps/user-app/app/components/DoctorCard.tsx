@@ -1,11 +1,13 @@
 "use client";
 
-import Card from "./Card";
-import { getAdminData } from "../lib/actions/getAdminData";
 import { useEffect, useState } from "react";
+import { getAdminData } from "../lib/actions/getAdminData";
+import Card from "./Card";
+import { Skeleton } from "@repo/ui";
 
 export default function ({ text }: { text: string }) {
   const [data, setData] = useState([{}]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   // const data = await getAdminData("");
 
@@ -13,6 +15,7 @@ export default function ({ text }: { text: string }) {
     const doIt = async () => {
       const response = await getAdminData(text);
       setData(response);
+      setLoading(false);
     };
     doIt();
   }, [text]);
@@ -20,11 +23,28 @@ export default function ({ text }: { text: string }) {
   return (
     <>
       <div className="flex justify-center pt-5">
-        <div className="grid grid-cols-1 gap-5 lg:grid lg:grid-cols-4 lg:gap-5 md:grid-cols-2">
-          <Card data={data} AddIcon={<Address />} Category={<Category />} />
+        <div className="grid grid-cols-1 gap-5 xl:grid-cols-4 md:grid-cols-2">
+          {loading ? (
+            <div>Loading</div>
+          ) : (
+            <Card data={data} AddIcon={<Address />} Category={<Category />} />
+          )}
+          {/* <Card data={data} AddIcon={<Address />} Category={<Category />} /> */}
         </div>
       </div>
     </>
+  );
+}
+
+export function SkeletonCard() {
+  return (
+    <div className="flex flex-col space-y-3">
+      <Skeleton className="h-[300px] w-[250px] rounded-xl bg-gray-500" />
+      <div className="space-y-2">
+        <Skeleton className="h-4 w-[250px] bg-gray-400" />
+        <Skeleton className="h-4 w-[200px] bg-gray-400" />
+      </div>
+    </div>
   );
 }
 

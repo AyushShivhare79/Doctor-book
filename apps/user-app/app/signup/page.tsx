@@ -15,20 +15,17 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useSession } from "next-auth/react";
 
-// import { useToast } from "@repo/ui";
-
 export default function Signup() {
-  // const { toast } = useToast();
-
-  const router = useRouter();
-  const [loading, setLoading] = useState<boolean>(false);
-
   const { data: session, status } = useSession();
 
+  const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
+
+  //Loading during session loading
+
   // if (status === "authenticated") {
-  //   return router.push("/");
+  //   router.push("/");
   // }
-  // console.log("Iam session: ", session);
 
   const {
     register,

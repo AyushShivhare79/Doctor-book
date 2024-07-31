@@ -4,7 +4,7 @@ import { pages } from "next/dist/build/templates/app-page";
 import { signIn, signOut } from "next-auth/react";
 import { NextResponse } from "next/server";
 import { redirect } from "next/navigation";
-
+import { signInBody } from "./signInValidation";
 //zod validation or in custom page check where is it good?
 
 export const authOptions = {
@@ -26,6 +26,11 @@ export const authOptions = {
       async authorize(credentials) {
         const phoneNumber = credentials?.phoneNumber;
         const password = credentials?.password;
+
+        const { success } = signInBody.safeParse({ phoneNumber, password });
+        if (!success) {
+          return null;
+        }
         const userInfo = await prisma.user.findFirst({
           where: {
             phoneNumber,
@@ -66,8 +71,8 @@ export const authOptions = {
       return session;
     },
   },
-  // pages: {
-  //   signIn: "/signin",
-  //   signOut: "/signin",
-  // },
+  pages: {
+    signIn: "/signin",
+    signOut: "/signin",
+  },
 };

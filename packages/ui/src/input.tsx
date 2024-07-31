@@ -3,14 +3,21 @@ export default function ({
   placeholder,
   register,
   name,
+  disabled,
 }: {
   placeholder: string;
   register: any;
   name: string;
+  disabled: boolean;
 }) {
   return (
     <>
-      <Input placeholder={placeholder} className="w-full" {...register(name)} />
+      <Input
+        disabled={disabled}
+        placeholder={placeholder}
+        className="w-full"
+        {...register(name)}
+      />
     </>
   );
 }

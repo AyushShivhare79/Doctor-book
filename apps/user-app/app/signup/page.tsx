@@ -105,6 +105,7 @@ export default function Signup() {
                     placeholder={value.placeholder}
                     register={register}
                     name={value.name}
+                    disabled={loading}
                   />
                   {
                     // @ts-ignore
@@ -122,6 +123,7 @@ export default function Signup() {
             </CardContent>
             <CardFooter className="flex justify-center items-center">
               <Button
+                disabled={loading}
                 type="submit"
                 className="flex gap-3 bg-blue-700 text-white w-full"
               >

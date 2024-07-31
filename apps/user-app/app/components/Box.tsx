@@ -1,10 +1,7 @@
 "use client";
 
+import { ChangeEvent, useState } from "react";
 import Input from "./Input";
-import { Button } from "@repo/ui";
-
-import SearchInput from "@repo/ui/searchInput";
-
 import {
   Select,
   SelectContent,
@@ -12,8 +9,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@repo/ui";
-import { ChangeEvent, useState } from "react";
-import { string } from "zod";
 import DoctorCard from "./DoctorCard";
 
 export default function () {
@@ -21,7 +16,8 @@ export default function () {
 
   return (
     <>
-      <div className="  bg-blue-950 border border-red-600 flex flex-col justify-center items-center gap-5 md:flex md:flex-row md:justify-center md:gap-5 min-h-80 max-h-80">
+      {/* bg-blue-950 */}
+      <div className="flex flex-col justify-center items-center gap-5 bg-violet-950 md:flex md:flex-row md:justify-center md:gap-5 min-h-80 max-h-80">
         <SelectData />
         <SelectData />
         <Input

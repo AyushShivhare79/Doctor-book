@@ -8,6 +8,7 @@ import { signIn, useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import Complete from "../components/AuthComponents/Complete";
+import axios from "axios";
 
 export default function () {
   const { data: session, status } = useSession();
@@ -27,24 +28,30 @@ export default function () {
   const submitData: SubmitHandler<SignInBody> = async (data) => {
     setLoading(true);
 
-    // console.log("Before");
-    // new Promise((resolve) => setTimeout(resolve, 5000));
-    // console.log("After");
-
     const response = await signIn("credentials", {
       phoneNumber: data.phoneNumber,
       password: data.password,
       redirect: false,
       // callbackUrl: "/",
     });
-    setLoading(false);
+
+    if (response?.error === "User not verified!") {
+      toast.error("User not verified!");
+      const response = await axios.post("/api/verify-phone/send-otp", data);
+      if (response.data) {
+        router.push(`/verify-otp?phoneNumber=${data.phoneNumber}`);
+        setLoading(false);
+        return toast.success("OTP send successful");
+      }
+    }
 
     if (!response?.ok) {
+      setLoading(false);
       return toast.error("Invalid credentials please signup!");
     }
 
-    toast.success("User signIn successful!");
     router.push("/");
+    return toast.success("User signIn successful!");
 
     // console.log(response);
   };
@@ -73,54 +80,6 @@ export default function () {
         link={"/signup"}
         btnName={"Log in"}
       />
-      {/* <div className="flex flex-col justify-center items-center h-screen">
-        <Card className="flex flex-col w-full sm:w-96 border">
-          <CardHeader>
-            <CardTitle className="flex justify-center font-mono text-3xl">
-              Doctor Book
-            </CardTitle>
-          </CardHeader>
-          <form onSubmit={handleSubmit(submitData)} className="form">
-            <CardContent className="flex flex-col gap-5">
-              {fieldArr.map((value, index) => (
-                <div>
-                  <Input
-                    placeholder={value.placeholder}
-                    register={register}
-                    name={value.name}
-                    disabled={loading}
-                  />
-                  {
-                    // @ts-ignore
-                    errors?.[value.name] && (
-                      <div className="text-red-500 text-xs">
-                        {
-                          // @ts-ignore
-                          errors?.[value.name].message
-                        }
-                      </div>
-                    )
-                  }
-                </div>
-              ))}
-            </CardContent>
-            <CardFooter className="flex flex-col gap-3 justify-center items-center">
-              <Button
-                disabled={loading}
-                type="submit"
-                className="flex gap-3 bg-blue-700 text-white w-full"
-              >
-                {loading ? (
-                  <PulseLoader color="#ffffff" className="absolute" size={10} />
-                ) : (
-                  <div> SignIn </div>
-                )}
-              </Button>
-              <SwitchPageAccoun />
-            </CardFooter>
-          </form>
-        </Card>
-      </div> */}
     </>
   );
 }

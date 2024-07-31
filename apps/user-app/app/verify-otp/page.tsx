@@ -17,12 +17,14 @@ export default function () {
   const router = useRouter();
 
   useEffect(() => {
-    const response = searchParams.get("phoneNumber");
-
-    if (phoneNumber === null) {
-      router.push("/signup");
-    }
-    setPhoneNumber(response);
+    const check = async () => {
+      const response = await searchParams.get("phoneNumber");
+      setPhoneNumber(response);
+      if (phoneNumber === null) {
+        router.push("/signup");
+      }
+    };
+    check();
   }, [searchParams, phoneNumber]);
 
   // const phoneNumber = "464656564";
@@ -30,16 +32,17 @@ export default function () {
     try {
       setLoading(true);
       const response = await axios.post(
-        `/api/verify-phone/verify-otp?otp=${otp}&phoneNumber=${phoneNumber}`,
+        `/api/verify-phone/verify-otp?otp=${otp}&phoneNumber=${phoneNumber}`
       );
       console.log("response: ", response.data);
+
       if (response.data.msg === "User not exists!") {
         toast.error("User not exists!");
         return router.push("/signup");
       }
-      if (response.data.msg === "Your number is already verified") {
-        toast.error("Your number is already verified");
-        return router.push("/api/auth/signin");
+      if (response.data.msg === "Your number is already verified!") {
+        toast.error("Your number is already verified!");
+        return router.push("/signin");
       }
       // if (response.statusText === "OK") {
       if (response.data.sent) {

@@ -25,7 +25,7 @@ async function VerifyOTP(request: NextRequest) {
     }
 
     if (response?.verified) {
-      return NextResponse.json({ msg: "Your number is already verified" });
+      return NextResponse.json({ msg: "Your number is already verified!" });
     }
 
     const twilioResponse = await client.verify.v2

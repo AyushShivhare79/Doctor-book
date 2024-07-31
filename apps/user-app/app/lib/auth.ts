@@ -5,6 +5,7 @@ import { signIn, signOut } from "next-auth/react";
 import { NextResponse } from "next/server";
 import { redirect } from "next/navigation";
 import { signInBody } from "./signInValidation";
+import { Console, error } from "console";
 //zod validation or in custom page check where is it good?
 
 export const authOptions = {
@@ -48,10 +49,14 @@ export const authOptions = {
           return null;
         }
 
+        console.log("before");
+
         if (!userInfo.verified) {
-          return null;
+          // return { error: "User not verified" };
+          throw new Error("User not verified!")
         }
 
+        console.log("After");
         return {
           id: userInfo.id.toString(),
           firstName: userInfo.firstName,
@@ -65,6 +70,24 @@ export const authOptions = {
   callbacks: {
     // async redirect({ url, baseUrl }) {
     //   return baseUrl
+    // },
+    // async signIn({
+    //   user,
+    //   account,
+    //   profile,
+    //   email,
+    //   credentials,
+    // }: {
+    //   user: any;
+    //   account: any;
+    //   profile: any;
+    //   email: any;
+    //   credentials: any;
+    // }) {
+    //   if (user?.error === "User not verified") {
+    //     throw new Error("User not verified");
+    //   }
+    //   return true;
     // },
     async session({ session, token }: any) {
       session.user.id = token.sub;

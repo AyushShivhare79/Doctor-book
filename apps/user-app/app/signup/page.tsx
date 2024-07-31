@@ -94,6 +94,7 @@ export default function Signup() {
         linkName={"Signin"}
         text={"Already have an account?"}
         link={"/signin"}
+        btnName={"Create Account"}
       />
       {/* <div className="flex flex-col justify-center items-center h-screen">
         <Card className="flex flex-col w-full sm:w-96 border">

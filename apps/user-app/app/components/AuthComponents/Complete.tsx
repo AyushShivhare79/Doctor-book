@@ -9,6 +9,8 @@ import {
 import Input from "@repo/ui/customInput";
 import SwitchPageAccoun from "../SwitchPageAccoun";
 import { PulseLoader } from "react-spinners";
+import Image from "next/image";
+import logo from "../Doctor.png";
 
 interface propsTypes {
   data: any;
@@ -18,9 +20,10 @@ interface propsTypes {
   loading: boolean;
   errors: any;
 
-  linkName: string
+  linkName: string;
   link: string;
   text: string;
+  btnName: string
 }
 
 export default function ({
@@ -33,14 +36,19 @@ export default function ({
   linkName,
   link,
   text,
+  btnName
 }: propsTypes) {
   return (
     <>
       <div className="flex flex-col justify-center items-center h-screen">
-        <Card className="flex flex-col w-full sm:w-96 border">
+        <Card className="flex flex-col w-full sm:w-96">
           <CardHeader>
-            <CardTitle className="flex justify-center font-mono text-3xl">
-              Doctor Book
+            <CardTitle className="flex justify-center">
+              <Image
+                src={logo}
+                alt="LOGO"
+                className="max-w-[200px] min-w-[200px] max-h-[40px] min-h-[40px] object-cover"
+              />
             </CardTitle>
           </CardHeader>
           <form onSubmit={handleSubmit(submitData)} className="form">
@@ -76,7 +84,7 @@ export default function ({
                 {loading ? (
                   <PulseLoader color="#ffffff" className="absolute" size={10} />
                 ) : (
-                  <div> SignIn </div>
+                  <div> {btnName} </div>
                 )}
               </Button>
               <SwitchPageAccoun linkName={linkName} link={link} text={text} />

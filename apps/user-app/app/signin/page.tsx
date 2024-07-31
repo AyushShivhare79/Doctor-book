@@ -71,6 +71,7 @@ export default function () {
         linkName={"Signup"}
         text={"Don't have an account?"}
         link={"/signup"}
+        btnName={"Log in"}
       />
       {/* <div className="flex flex-col justify-center items-center h-screen">
         <Card className="flex flex-col w-full sm:w-96 border">

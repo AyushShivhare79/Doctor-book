@@ -37,14 +37,14 @@ export default function ({
   return (
     <>
       <div className="flex justify-between items-center pr-10 pt-2 pb-2 border-b-2">
-        <div className="text-2xl font-medium">
+        {/* <div className="text-2xl font-medium"> */}
           {/* <img src={logo} alt="HERE" /> */}
           <Image
             src={logo}
             alt="LOGO"
             className="max-w-[200px] min-w-[200px] max-h-[40px] min-h-[40px] object-cover"
           />
-        </div>
+        {/* </div> */}
 
         <div className="hidden md:flex md:gap-3 md:items-center">
           <div

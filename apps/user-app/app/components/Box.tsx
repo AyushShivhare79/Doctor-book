@@ -17,7 +17,7 @@ export default function () {
   return (
     <>
       {/* bg-blue-950 */}
-      <div className="flex flex-col justify-center items-center gap-5 bg-violet-950 md:flex md:flex-row md:justify-center md:gap-5 min-h-80 max-h-80">
+      <div className="flex flex-col justify-center items-center gap-5 bg-black md:flex md:flex-row md:justify-center md:gap-5 min-h-80 max-h-80">
         <SelectData />
         <SelectData />
         <Input

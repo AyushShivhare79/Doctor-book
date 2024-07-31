@@ -19,7 +19,7 @@ export default function ({ id, btnName }: any) {
   return (
     <>
       <AlertDialog>
-        <AlertDialogTrigger className="border bg-blue-600 text-white rounded-xl h-9 w-28">
+        <AlertDialogTrigger className="flex justify-center items-center border bg-blue-600 text-white rounded-xl h-9 w-28">
           {/* <Button > */}
           {btnName}
           {/* </Button> */}

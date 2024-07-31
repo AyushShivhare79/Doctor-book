@@ -1,10 +1,5 @@
 "use client";
 
-import { Button } from "@repo/ui";
-import { PulseLoader } from "react-spinners";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@repo/ui";
-
-import Input from "@repo/ui/customInput";
 import axios from "axios";
 import { signupBody, SignupBody } from "../lib/validation";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -14,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useSession } from "next-auth/react";
+import Complete from "../components/AuthComponents/Complete";
 
 export default function Signup() {
   const { data: session, status } = useSession();
@@ -23,9 +19,9 @@ export default function Signup() {
 
   //Loading during session loading
 
-  // if (status === "authenticated") {
-  //   router.push("/");
-  // }
+  if (status === "authenticated") {
+    router.push("/");
+  }
 
   const {
     register,
@@ -39,8 +35,6 @@ export default function Signup() {
     setLoading(true);
     try {
       const createAccount = await axios.post("/api/signup", data);
-
-      // Uncomment this it's working fine
 
       if (createAccount.data.msg === "User already exists!") {
         setLoading(false);
@@ -90,7 +84,18 @@ export default function Signup() {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center h-screen">
+      <Complete
+        data={fieldArr}
+        register={register}
+        handleSubmit={handleSubmit}
+        loading={loading}
+        submitData={submitData}
+        errors={errors}
+        linkName={"Signin"}
+        text={"Already have an account?"}
+        link={"/signin"}
+      />
+      {/* <div className="flex flex-col justify-center items-center h-screen">
         <Card className="flex flex-col w-full sm:w-96 border">
           <CardHeader>
             <CardTitle className="flex justify-center font-mono text-3xl">
@@ -136,7 +141,7 @@ export default function Signup() {
             </CardFooter>
           </form>
         </Card>
-      </div>
+      </div> */}
     </>
   );
 }

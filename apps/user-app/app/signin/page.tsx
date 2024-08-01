@@ -1,6 +1,6 @@
 "use client";
 
-import { signInBody, SignInBody } from "../lib/signInValidation";
+import { signInBody, SignInBody } from "../lib/signinValidation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";

@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-import { signupBody, SignupBody } from "../lib/validation";
+import { signupBody, SignupBody } from "../lib/signupValidation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -85,7 +85,7 @@ export default function Signup() {
   return (
     <>
       <Complete
-        data={fieldArr}
+        data={fieldArr} 
         register={register}
         handleSubmit={handleSubmit}
         loading={loading}

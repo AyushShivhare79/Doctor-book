@@ -4,7 +4,7 @@ import { pages } from "next/dist/build/templates/app-page";
 import { signIn, signOut } from "next-auth/react";
 import { NextResponse } from "next/server";
 import { redirect } from "next/navigation";
-import { signInBody } from "./signInValidation";
+import { signInBody } from "./signinValidation";
 import { Console, error } from "console";
 //zod validation or in custom page check where is it good?
 

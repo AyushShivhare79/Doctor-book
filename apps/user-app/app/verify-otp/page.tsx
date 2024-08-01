@@ -26,9 +26,9 @@ export default function () {
       if (phoneNumber === null) {
         return router.push("/signup");
       }
-      const iWill = await axios.post("/api/verify-phone/send-otp", {
-        phoneNumber,
-      });
+      // const iWill = await axios.post("/api/verify-phone/send-otp", {
+      //   phoneNumber,
+      // });
       // if (iWill.data.msg === "User not exists!") {
       //   router.push("/signup");
       //   return toast.error("User not exists!");

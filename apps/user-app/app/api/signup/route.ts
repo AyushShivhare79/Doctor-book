@@ -1,6 +1,6 @@
 import prisma from "@repo/db/client";
 import { NextRequest, NextResponse } from "next/server";
-import { signupBody } from "../../lib/validation";
+import { signupBody } from "../../lib/signupValidation";
 
 //Zod
 //UserExists

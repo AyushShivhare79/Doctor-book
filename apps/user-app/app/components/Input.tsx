@@ -1,8 +1,6 @@
 "use client";
 
 import { Input } from "@repo/ui";
-import { ChangeEvent, useState } from "react";
-
 export default function ({ onChange }: { onChange: any }) {
   return (
     <>

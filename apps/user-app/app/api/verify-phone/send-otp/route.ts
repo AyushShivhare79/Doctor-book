@@ -1,3 +1,4 @@
+import prisma from "@repo/db/client";
 import { NextRequest, NextResponse } from "next/server";
 import twilio from "twilio";
 
@@ -11,6 +12,22 @@ async function SendOTP(req: NextRequest) {
   const userInfo = await req.json();
 
   const { phoneNumber } = userInfo;
+
+  // const response = await prisma.user.findFirst({
+  //   where: {
+  //     phoneNumber: phoneNumber,
+  //   },
+  // });
+
+  // console.log("BACKWARD")
+
+  // if (!response?.phoneNumber) {
+  //   return NextResponse.json({ msg: "User not exists!" });
+  // }
+  // // console.log(response);
+
+  // console.log("FORWARD")
+
   try {
     const twilioResponse = await client.verify.v2
       .services(serviceID)

@@ -7,6 +7,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@repo/ui";
 import { toast } from "react-toastify";
 import { PulseLoader } from "react-spinners";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { otpBody, OtpBody } from "../lib/otpValidation";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function () {
   const [otp, setOtp] = useState<string>();
@@ -21,14 +24,29 @@ export default function () {
       const response = await searchParams.get("phoneNumber");
       setPhoneNumber(response);
       if (phoneNumber === null) {
-        router.push("/signup");
+        return router.push("/signup");
       }
+      const iWill = await axios.post("/api/verify-phone/send-otp", {
+        phoneNumber,
+      });
+      // if (iWill.data.msg === "User not exists!") {
+      //   router.push("/signup");
+      //   return toast.error("User not exists!");
+      // }
     };
     check();
   }, [searchParams, phoneNumber]);
 
   // const phoneNumber = "464656564";
-  const verifyOTP = async () => {
+  // const verifyOTP = async () => {};
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<OtpBody>({ resolver: zodResolver(otpBody) });
+
+  const submitData: SubmitHandler<OtpBody> = async (data: any) => {
     try {
       setLoading(true);
       const response = await axios.post(
@@ -60,42 +78,52 @@ export default function () {
 
   return (
     <>
-      {/* Use validation for OTP as well */}
-
       <div className="flex flex-col justify-center items-center h-screen">
         <Card className="flex justify-center flex-col items-center p-10">
           <CardHeader>
             <CardTitle className="font-mono text-3xl">Verify OTP</CardTitle>
           </CardHeader>
           <Suspense>
-            <CardContent>
-              <InputOTP
-                maxLength={6}
-                value={otp}
-                onChange={(value) => setOtp(value)}
-              >
-                <InputOTPGroup>
-                  <InputOTPSlot index={0} />
-                  <InputOTPSlot index={1} />
-                  <InputOTPSlot index={2} />
-                  <InputOTPSlot index={3} />
-                  <InputOTPSlot index={4} />
-                  <InputOTPSlot index={5} />
-                </InputOTPGroup>
-              </InputOTP>
-            </CardContent>
-            <CardFooter className="flex justify-center items-center w-full">
-              <Button
-                onClick={verifyOTP}
-                className="flex gap-3 bg-blue-700 text-white w-full"
-              >
-                {loading ? (
-                  <PulseLoader color="#ffffff" className="absolute" size={10} />
-                ) : (
-                  <div> Verify </div>
+            <form onSubmit={handleSubmit(submitData)}>
+              <CardContent>
+                <InputOTP
+                  {...register("otp")}
+                  maxLength={6}
+                  value={otp}
+                  onChange={(value) => setOtp(value)}
+                >
+                  <InputOTPGroup>
+                    <InputOTPSlot index={0} />
+                    <InputOTPSlot index={1} />
+                    <InputOTPSlot index={2} />
+                    <InputOTPSlot index={3} />
+                    <InputOTPSlot index={4} />
+                    <InputOTPSlot index={5} />
+                  </InputOTPGroup>
+                </InputOTP>
+                {errors.otp && (
+                  <div className="text-red-500 text-xs">
+                    {errors.otp.message}
+                  </div>
                 )}
-              </Button>
-            </CardFooter>
+              </CardContent>
+              <CardFooter className="flex justify-center items-center w-full">
+                <Button
+                  // onClick={verifyOTP}
+                  className="flex gap-3 bg-blue-700 text-white w-full"
+                >
+                  {loading ? (
+                    <PulseLoader
+                      color="#ffffff"
+                      className="absolute"
+                      size={10}
+                    />
+                  ) : (
+                    <div> Verify </div>
+                  )}
+                </Button>
+              </CardFooter>
+            </form>
           </Suspense>
         </Card>
       </div>

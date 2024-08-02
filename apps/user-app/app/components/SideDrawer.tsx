@@ -1,19 +1,41 @@
-import SideBar02 from "./SideBar02";
+import {
+  Button,
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@repo/ui";
 import SideLabel from "./SideLabel";
 
 export default function () {
   return (
     <>
-      <div className="flex justify-center pt-40 border w-full">
-        <div className="flex flex-col gap-5">
-          <SideLabel icon={<Home />} text="Home" href="/dashboard" />
-          <SideLabel
-            icon={<Appointment />}
-            text="Appointment"
-            href="/appointment"
-          />
-        </div>
-      </div>
+      <Drawer>
+        <DrawerTrigger>Open</DrawerTrigger>
+        <DrawerContent className=" bg-black text-white">
+          <DrawerHeader>
+            <DrawerTitle>
+                USER PANEL
+            </DrawerTitle>
+          </DrawerHeader>
+          <DrawerFooter>
+            <SideLabel icon={<Home />} text="Home" href="/dashboard" />
+            <SideLabel
+              icon={<Appointment />}
+              text="Appointment"
+              href="/appointment"
+            />
+            {/* <Button>Submit</Button>
+            <DrawerClose>
+              <Button variant="outline">Cancel</Button>
+            </DrawerClose> */}
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
     </>
   );
 }

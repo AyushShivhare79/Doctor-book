@@ -1,19 +1,33 @@
-import SideBar02 from "./SideBar02";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@repo/ui";
 import SideLabel from "./SideLabel";
 
 export default function () {
   return (
     <>
-      <div className="flex justify-center pt-40 border w-full">
-        <div className="flex flex-col gap-5">
-          <SideLabel icon={<Home />} text="Home" href="/dashboard" />
-          <SideLabel
-            icon={<Appointment />}
-            text="Appointment"
-            href="/appointment"
-          />
-        </div>
-      </div>
+      <Sheet>
+        <SheetTrigger>Open</SheetTrigger>
+        <SheetContent className="flex justify-center flex-col items-center bg-black text-white">
+          <SheetHeader>
+            <SheetTitle>
+              <SideLabel icon={<Home />} text="Home" href="/dashboard" />
+            </SheetTitle>
+            <SheetTitle>
+              <SideLabel
+                icon={<Appointment />}
+                text="Appointment"
+                href="/appointment"
+              />
+            </SheetTitle>
+          </SheetHeader>
+        </SheetContent>
+      </Sheet>
     </>
   );
 }

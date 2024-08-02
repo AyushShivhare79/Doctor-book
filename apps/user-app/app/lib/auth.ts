@@ -49,14 +49,11 @@ export const authOptions = {
           return null;
         }
 
-        console.log("before");
-
         if (!userInfo.verified) {
           // return { error: "User not verified" };
-          throw new Error("User not verified!")
+          throw new Error("User not verified!");
         }
 
-        console.log("After");
         return {
           id: userInfo.id.toString(),
           firstName: userInfo.firstName,

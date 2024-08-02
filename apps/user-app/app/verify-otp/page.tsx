@@ -19,23 +19,25 @@ export default function () {
 
   const router = useRouter();
 
+  const response = searchParams.get("phoneNumber");
+
   useEffect(() => {
-    const check = async () => {
-      const response = await searchParams.get("phoneNumber");
-      setPhoneNumber(response);
-      if (phoneNumber === null) {
-        return router.push("/signup");
-      }
-      // const iWill = await axios.post("/api/verify-phone/send-otp", {
-      //   phoneNumber,
-      // });
-      // if (iWill.data.msg === "User not exists!") {
-      //   router.push("/signup");
-      //   return toast.error("User not exists!");
-      // }
-    };
-    check();
-  }, [searchParams, phoneNumber]);
+    setPhoneNumber(response);
+  }, [response]);
+  if (phoneNumber === null) {
+    return router.push("/signup");
+  }
+
+  // useEffect(() => {
+  // const iWill = await axios.post("/api/verify-phone/send-otp", {
+  //   phoneNumber,
+  // });
+  // if (iWill.data.msg === "User not exists!") {
+  //   router.push("/signup");
+  //   return toast.error("User not exists!");
+  // }
+  // check();
+  // }, [searchParams, phoneNumber]);
 
   // const phoneNumber = "464656564";
   // const verifyOTP = async () => {};
@@ -50,22 +52,24 @@ export default function () {
     try {
       setLoading(true);
       const response = await axios.post(
-        `/api/verify-phone/verify-otp?otp=${otp}&phoneNumber=${phoneNumber}`
+        `/api/verify-phone/verify-otp?otp=${otp}&phoneNumber=${phoneNumber}`,
       );
-      console.log("response: ", response.data);
 
       if (response.data.msg === "User not exists!") {
         toast.error("User not exists!");
         return router.push("/signup");
       }
+
       if (response.data.msg === "Your number is already verified!") {
         toast.error("Your number is already verified!");
         return router.push("/signin");
       }
       // if (response.statusText === "OK") {
+
       if (response.data.sent) {
         setLoading(false);
         toast.success("OTP verify successful");
+        return router.push("/signin");
       } else {
         setLoading(false);
         return toast.error("Wrong OTP");

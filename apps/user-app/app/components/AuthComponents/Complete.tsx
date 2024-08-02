@@ -23,7 +23,7 @@ interface propsTypes {
   linkName: string;
   link: string;
   text: string;
-  btnName: string
+  btnName: string;
 }
 
 export default function ({
@@ -36,7 +36,7 @@ export default function ({
   linkName,
   link,
   text,
-  btnName
+  btnName,
 }: propsTypes) {
   return (
     <>

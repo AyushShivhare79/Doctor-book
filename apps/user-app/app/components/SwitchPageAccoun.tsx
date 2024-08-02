@@ -1,6 +1,14 @@
 import Link from "next/link";
 
-export default function ({ text, link, linkName }: { text: string; link: string, linkName: string }) {
+export default function ({
+  text,
+  link,
+  linkName,
+}: {
+  text: string;
+  link: string;
+  linkName: string;
+}) {
   return (
     <>
       <div>

@@ -85,7 +85,7 @@ export default function Signup() {
   return (
     <>
       <Complete
-        data={fieldArr} 
+        data={fieldArr}
         register={register}
         handleSubmit={handleSubmit}
         loading={loading}

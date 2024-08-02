@@ -28,10 +28,10 @@ async function Signup(req: NextRequest) {
   try {
     const response = await prisma.user.create({
       data: {
-        firstName,
-        lastName,
-        phoneNumber,
-        password,
+        firstName: firstName,
+        lastName: lastName,
+        phoneNumber: phoneNumber,
+        password: password,
       },
     });
     return NextResponse.json(response);

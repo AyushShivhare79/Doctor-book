@@ -20,7 +20,7 @@ async function VerifyOTP(request: NextRequest) {
       },
     });
 
-    if (!response?.phoneNumber) {
+    if (!response) {
       return NextResponse.json({ msg: "User not exists!" });
     }
 

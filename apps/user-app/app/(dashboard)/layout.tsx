@@ -16,7 +16,7 @@ export default async function ({ children }: any) {
       <div>
         <AppbarClient />
         <div className="flex h-screen">
-        <div className="hidden md:visible md:flex md: w-1/5">
+        <div className="hidden md:visible md:flex md:w-1/6">
         <SideBar />
         </div>
         <div className="w-full">{children}</div>

@@ -9,3 +9,4 @@ export * from "./components/ui/input-otp";
 export * from "./components/ui/form";
 export * from "./components/ui/use-toast";
 export * from "./components/ui/skeleton";
+export * from "./components/ui/drawer";

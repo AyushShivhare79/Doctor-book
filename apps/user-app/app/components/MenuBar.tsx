@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import logo from "./Doctor.png";
 import Image from "next/image";
+import SideDrawer from "./SideDrawer";
 export default function ({
   user,
   onSignin,

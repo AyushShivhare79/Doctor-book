@@ -1,7 +1,7 @@
 const Page = () => {
   return (
     <>
-      <div>Home</div>
+      <div>Route to home page from home</div>
     </>
   );
 };

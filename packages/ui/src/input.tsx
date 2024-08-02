@@ -13,6 +13,7 @@ export default function ({
   return (
     <>
       <Input
+        autoComplete="off"
         disabled={disabled}
         placeholder={placeholder}
         className="w-full"

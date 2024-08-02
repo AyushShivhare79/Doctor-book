@@ -56,7 +56,7 @@ export default function ({
           </div>
           <div
             className=" hover:cursor-pointer"
-            onClick={() => router.push("/dashboard")}
+            onClick={() => router.push("/appointment")}
           >
             Panel
           </div>
@@ -84,7 +84,7 @@ export default function ({
           </div>
           <div
             className=" hover:cursor-pointer"
-            onClick={() => router.push("/dashboard")}
+            onClick={() => router.push("/appointment")}
           >
             Panel
           </div>

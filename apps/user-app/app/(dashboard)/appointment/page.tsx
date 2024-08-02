@@ -19,8 +19,7 @@ export default async function () {
 
   return (
     <>
-      <div>
-        {/* {JSON.stringify(data.data)} */}
+      <div >
 
         <Table className="bg-black text-white">
           {/* <TableCaption>A list of your recent invoices.</TableCaption> */}

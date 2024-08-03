@@ -52,7 +52,7 @@ export default function () {
     try {
       setLoading(true);
       const response = await axios.post(
-        `/api/verify-phone/verify-otp?otp=${otp}&phoneNumber=${phoneNumber}`,
+        `/api/verify-phone/verify-otp?otp=${otp}&phoneNumber=${phoneNumber}`
       );
 
       if (response.data.msg === "User not exists!") {
@@ -91,6 +91,7 @@ export default function () {
             <form onSubmit={handleSubmit(submitData)}>
               <CardContent>
                 <InputOTP
+                  disabled={loading}
                   {...register("otp")}
                   maxLength={6}
                   value={otp}
@@ -113,6 +114,7 @@ export default function () {
               </CardContent>
               <CardFooter className="flex justify-center items-center w-full">
                 <Button
+                  disabled={loading}
                   // onClick={verifyOTP}
                   className="flex gap-3 bg-blue-700 text-white w-full"
                 >

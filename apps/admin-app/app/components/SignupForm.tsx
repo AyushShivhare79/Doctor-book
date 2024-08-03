@@ -154,6 +154,7 @@ export default function () {
             </CardContent>
             <CardFooter className="flex flex-col gap-3 justify-center items-center">
               <Button
+                disabled={loading}
                 type="submit"
                 className="flex gap-3 bg-blue-700 text-white w-full"
               >

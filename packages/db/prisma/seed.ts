@@ -89,7 +89,6 @@ async function main() {
     },
     update: {},
     create: {
-      id: 1,
       firstName: "Test User",
       lastName: "01",
       phoneNumber: "1234567891",
@@ -104,7 +103,6 @@ async function main() {
     },
     update: {},
     create: {
-      id: 2,
       firstName: "Test User",
       lastName: "02",
       phoneNumber: "1234567892",

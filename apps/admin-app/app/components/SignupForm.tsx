@@ -12,13 +12,21 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
+import Image from "next/image";
+import logo from "./Logo(crop).png";
 
 export default function () {
   const [image, setFile] = useState<File | null>();
   const [preview, setPreview] = useState<any>();
 
   const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    setPreview(
+      "https://res.cloudinary.com/ddkc5kdus/image/upload/v1722667244/admin-images/edxrv4yaaxwclrxltfz1.jpg"
+    );
+  }, []);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -45,17 +53,19 @@ export default function () {
     } else {
       // router.push("/dashboard");
       try {
-        if (!image) return;
-
-        const formdata = new FormData();
-        formdata.append("Image", image);
-
-        const response = await axios.post("/api/upload-image", formdata);
-
-        const url = response.data.URL;
+        if (image) {
+          const formdata = new FormData();
+          formdata.append("Image", image);
+          const response = await axios.post("/api/upload-image", formdata);
+          const url = response.data.URL;
+          const imageSave = await axios.post("/api/update-admin-image", {
+            phoneNumber: data.phoneNumber,
+            url: url,
+          });
+        }
         const imageSave = await axios.post("/api/update-admin-image", {
           phoneNumber: data.phoneNumber,
-          url: url,
+          url: "https://res.cloudinary.com/ddkc5kdus/image/upload/v1722667244/admin-images/edxrv4yaaxwclrxltfz1.jpg",
         });
         setLoading(false);
         toast.success("User signup successful");
@@ -84,16 +94,20 @@ export default function () {
   return (
     <>
       <div className="flex flex-col justify-center items-center h-screen">
-        <Card className="flex flex-col sm:w-[450px] sm:h-auto">
+        <Card className="flex flex-col w-full  sm:w-96">
           {/* There is an issue with the title for doctor book */}
           <CardHeader>
-            <CardTitle className="flex justify-center font-mono text-3xl">
-              Doctor Book
-            </CardTitle>
+            {/* <CardTitle className="flex justify-center font-mono text-3xl">
+              <Image
+                src={logo}
+                alt="Logo"
+                className="border border-black max-w-[200px] min-w-[200px] max-h-[40px] min-h-[40px] object-cover"
+              />
+            </CardTitle> */}
           </CardHeader>
 
           <form onSubmit={handleSubmit(submitData)}>
-            <CardContent className="flex flex-col gap-5 p-10">
+            <CardContent>
               <div className=" flex flex-col items-center gap-2">
                 <img
                   className="max-w-[150px] min-w-[150px] max-h-[150px] min-h-[150px] object-cover rounded-full border border-black"
@@ -107,6 +121,8 @@ export default function () {
                   Upload
                 </label>
               </div>
+            </CardContent>
+            <CardContent className="flex flex-col gap-2">
               <input
                 id="dp"
                 type="file"
@@ -117,6 +133,7 @@ export default function () {
               {fieldArr.map((value, index) => (
                 <div>
                   <Input
+                    disabled={loading}
                     name={value.name}
                     placeholder={value.placeholder}
                     register={register}
@@ -135,8 +152,7 @@ export default function () {
                 </div>
               ))}
             </CardContent>
-
-            <CardFooter className="flex justify-center">
+            <CardFooter className="flex flex-col gap-3 justify-center items-center">
               <Button
                 type="submit"
                 className="flex gap-3 bg-blue-700 text-white w-full"
